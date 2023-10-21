@@ -35,7 +35,7 @@ const NavBar = ({ onContentTypeChange }: NavBarProps) => {
       <Navbar.Collapse className="justify-content-end">
         <Navbar.Text>
           <a
-            href="https://github.com/your-username/your-repo"
+            href="https://github.com/HamidRezaRezaeiGitHub/QueryFusion"
             target="_blank"
             rel="noopener noreferrer">
             <GitHub size={24} />
