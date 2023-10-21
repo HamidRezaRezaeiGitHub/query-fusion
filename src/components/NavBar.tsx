@@ -19,7 +19,7 @@ const NavBar = ({ onContentTypeChange }: NavBarProps) => {
   };
 
   return (
-    <Navbar bg="dark" variant="dark" fixed="top">
+    <Navbar bg="dark" variant="dark" fixed="top" className="px-3">
       <Navbar.Brand href="#home">
         <img src={logo} alt="QueryFusion Logo" height="30" />
         QueryFusion
