@@ -9,6 +9,27 @@
 @media (max-width: 767.98px) {
   /* Bootstrap md breakpoint is 768px */
   .full-screen {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
     overflow-y: auto;
   }
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 5px;
+  justify-content: flex-start;
+}
+
+.flex-item-navbar {
+  flex-basis: 60px;
+  position: sticky;
+  top: 0;
+}
+
+.flex-item-layout {
+  flex-grow: 1;
 }
