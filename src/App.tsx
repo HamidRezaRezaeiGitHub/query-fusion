@@ -1,8 +1,13 @@
+import { Container } from "react-bootstrap";
 import "./App.css";
 import "./styles/debug.css";
 
 function App() {
-  return <div className="debug-border1">App</div>;
+  return (
+    <Container fluid className="app full-screen debug-border1">
+      App
+    </Container>
+  );
 }
 
 export default App;
