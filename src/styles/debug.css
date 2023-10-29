@@ -1,0 +1,19 @@
+.debug-border1 {
+  border: 1px solid black;
+  background-color: #7e7f81;
+}
+
+.debug-border2 {
+  border: 1px solid rgb(252, 0, 0);
+  background-color: #f89898;
+}
+
+.debug-border3 {
+  border: 1px solid rgb(21, 0, 255);
+  background-color: #8f9ffb;
+}
+
+.debug-border4 {
+  border: 1px solid rgb(24, 73, 0);
+  background-color: #9bf5a8;
+}
