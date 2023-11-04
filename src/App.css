@@ -25,6 +25,14 @@
   justify-content: flex-start;
 }
 
+.dark-mode {
+  background-color: rgb(53, 52, 52);
+}
+
+.light-mode {
+  background-color: aliceblue;
+}
+
 .flex-item-navbar {
   flex-basis: 60px;
   position: sticky;
