@@ -19,7 +19,12 @@
   margin-right: 10px;
 }
 
-.toggle-icon {
-  font-size: 20px;
+.theme-toggle-icon {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.github-icon {
+  font-size: 25px;
   cursor: pointer;
 }

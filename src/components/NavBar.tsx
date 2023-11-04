@@ -4,6 +4,7 @@ import "../styles/NavBar.css";
 import { ContentType } from "../types/ContentType";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 interface NavBarProps {
   isDarkMode: boolean;
@@ -50,9 +51,14 @@ const NavBar = ({
         <Nav className="push-right">
           <Nav.Link onClick={() => setIsDarkMode((prevMode) => !prevMode)}>
             <FontAwesomeIcon
-              className="toggle-icon"
+              className="theme-toggle-icon"
               icon={isDarkMode ? faSun : faMoon}
             />
+          </Nav.Link>
+          <Nav.Link
+            href="https://github.com/HamidRezaRezaeiGitHub/QueryFusion"
+            target="_blank">
+            <FontAwesomeIcon className="github-icon" icon={faGithub} />
           </Nav.Link>
         </Nav>
       </Navbar>

@@ -14,7 +14,7 @@ function App() {
       className={
         isDarkMode ? "app full-screen dark-mode" : "app full-screen light-mode"
       }>
-      <div className="flex-item-navbar debug-border-red-pink">
+      <div className="flex-item-navbar ">
         <NavBar
           isDarkMode={isDarkMode}
           setIsDarkMode={setIsDarkMode}
