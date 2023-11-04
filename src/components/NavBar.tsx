@@ -33,7 +33,7 @@ const NavBar = ({
           />{" "}
           QueryFusion
         </Navbar.Brand>
-        <Nav className="me-auto">
+        <Nav className="push-left">
           <NavDropdown title={contentType} id="collapsible-nav-dropdown">
             <NavDropdown.Item
               href="#"
@@ -46,8 +46,13 @@ const NavBar = ({
               XML
             </NavDropdown.Item>
           </NavDropdown>
+        </Nav>
+        <Nav className="push-right">
           <Nav.Link onClick={() => setIsDarkMode((prevMode) => !prevMode)}>
-            <FontAwesomeIcon icon={isDarkMode ? faSun : faMoon} />
+            <FontAwesomeIcon
+              className="toggle-icon"
+              icon={isDarkMode ? faSun : faMoon}
+            />
           </Nav.Link>
         </Nav>
       </Navbar>
