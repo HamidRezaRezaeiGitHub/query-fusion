@@ -1,3 +1,11 @@
 .navbar {
   height: 100%;
 }
+
+.navbar-logo {
+  width: auto;
+  height: 100%;
+  max-height: 30px;
+  object-fit: contain;
+  margin-left: 10px;
+}

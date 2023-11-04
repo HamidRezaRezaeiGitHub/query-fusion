@@ -20,7 +20,8 @@
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  gap: 5px;
+  /* gap: 5px; */
+  row-gap: 5px;
   justify-content: flex-start;
 }
 

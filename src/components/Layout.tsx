@@ -4,7 +4,7 @@ import "../styles/Layout.css";
 
 const Layout = () => {
   return (
-    <Container fluid className="layout debug-border1">
+    <Container fluid className="layout debug-border-black-gray">
       <div className="flex-item-left-panel"></div>
       <div className="flex-item-right-panel"></div>
       Layout
