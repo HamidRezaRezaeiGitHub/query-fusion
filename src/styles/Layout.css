@@ -1,1 +1,25 @@
+.layout {
+  flex-grow: 1;
+  height: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+}
 
+.content-panel {
+  flex: 1;
+  margin: 5px;
+  padding: 10px;
+}
+
+.divider {
+  width: 1px;
+  background-color: #ccc; /* Adjust color as needed */
+}
+
+.query-panel {
+  flex: 1;
+  margin: 5px;
+  padding: 10px;
+}

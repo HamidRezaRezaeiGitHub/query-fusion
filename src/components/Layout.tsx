@@ -1,14 +1,13 @@
-import { Container } from "react-bootstrap";
 import "../styles/debug.css";
 import "../styles/Layout.css";
 
 const Layout = () => {
   return (
-    <Container fluid className="layout debug-border-black-gray">
-      <div className="flex-item-left-panel"></div>
-      <div className="flex-item-right-panel"></div>
-      Layout
-    </Container>
+    <div className="layout debug-border-black-gray ">
+      <div className="content-panel debug-border-red-pink">ContentPanel</div>
+      <div className="divider"></div>
+      <div className="query-panel debug-border-navy-lightblue">QueryPanel</div>
+    </div>
   );
 };
 

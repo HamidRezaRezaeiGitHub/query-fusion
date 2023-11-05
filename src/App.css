@@ -41,4 +41,7 @@
 
 .flex-item-layout {
   flex-grow: 1;
+  height: calc(100vh - 60px - 5px);
+  display: flex;
+  flex-direction: row;
 }

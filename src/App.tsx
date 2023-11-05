@@ -22,7 +22,7 @@ function App() {
           setContentType={setContentType}
         />
       </div>
-      <div className="flex-item-layout">
+      <div className="flex-item-layout debug-border-green-lime">
         <Layout />
       </div>
     </div>
