@@ -22,8 +22,8 @@ function App() {
           setContentType={setContentType}
         />
       </div>
-      <div className="flex-item-layout debug-border-green-lime">
-        <Layout />
+      <div className="flex-item-layout">
+        <Layout contentType={contentType} isDarkMode={isDarkMode} />
       </div>
     </div>
   );

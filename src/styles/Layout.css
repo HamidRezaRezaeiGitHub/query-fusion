@@ -1,6 +1,6 @@
 .layout {
   flex-grow: 1;
-  height: 100px;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -9,17 +9,17 @@
 
 .content-panel {
   flex: 1;
-  margin: 5px;
-  padding: 10px;
+  margin: 0;
+  padding: 0;
 }
 
 .divider {
-  width: 1px;
-  background-color: #ccc; /* Adjust color as needed */
+  width: 3px;
+  background-color: #fff; /* Adjust color as needed */
 }
 
 .query-panel {
   flex: 1;
-  margin: 5px;
-  padding: 10px;
+  margin: 0;
+  padding: 0;
 }
