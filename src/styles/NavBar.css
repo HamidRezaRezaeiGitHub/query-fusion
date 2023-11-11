@@ -2,7 +2,7 @@
   height: 100%;
 }
 
-.navbar-logo {
+.navbar__logo {
   width: auto;
   height: 100%;
   max-height: 30px;
@@ -10,21 +10,21 @@
   margin-left: 10px;
 }
 
-.push-left {
+.navbar--push-left {
   margin-right: auto;
 }
 
-.push-right {
+.navbar--push-right {
   margin-left: auto;
   margin-right: 10px;
 }
 
-.theme-toggle-icon {
+.navbar__switch {
   font-size: 25px;
   cursor: pointer;
 }
 
-.github-icon {
+.navbar__github {
   font-size: 25px;
   cursor: pointer;
 }

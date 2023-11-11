@@ -7,7 +7,7 @@
   overflow: auto;
 }
 
-.content-panel {
+.layout__content-panel {
   flex: 1;
   margin: 0;
   padding: 0;
@@ -15,12 +15,12 @@
   flex-direction: column;
 }
 
-.divider {
+.layout__divider {
   width: 3px;
-  background-color: #fff; /* Adjust color as needed */
+  background-color: #fff;
 }
 
-.query-panel {
+.layout__query-panel {
   flex: 1;
   margin: 0;
   padding: 0;

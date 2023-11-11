@@ -1,47 +1,44 @@
-.full-screen {
+.app {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  row-gap: 5px;
+  justify-content: flex-start;
+}
+
+.app--full-screen {
   width: 100%;
   min-height: 100vh;
-  position: relative;
   overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 /* Enable vertical scrolling on smaller screens */
 @media (max-width: 767.98px) {
   /* Bootstrap md breakpoint is 768px */
-  .full-screen {
+  .app-full-screen {
     width: 100%;
     min-height: 100vh;
-    position: relative;
     overflow-y: auto;
   }
 }
 
-.app {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  /* gap: 5px; */
-  row-gap: 5px;
-  justify-content: flex-start;
-}
-
-.dark-mode {
+.app--dark-mode {
   background-color: rgb(53, 52, 52);
 }
 
-.light-mode {
+.app--light-mode {
   background-color: aliceblue;
 }
 
-.flex-item-navbar {
+.app__navbar {
   flex-basis: 60px;
-  position: sticky;
-  top: 0;
 }
 
-.flex-item-layout {
+.app__layout {
   flex-grow: 1;
-  height: calc(100vh - 60px - 5px);
+  height: calc(
+    100vh - 60px - 5px
+  ); /*Full height - navbar's fixed height - row gap*/
   display: flex;
   flex-direction: row;
 }

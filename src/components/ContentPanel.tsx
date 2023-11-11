@@ -24,7 +24,7 @@ const ContentPanel = ({ contentType, isDarkMode }: ContentPanelProps) => {
 
   return (
     <>
-      <div className="content-container debug-border-green-lime">
+      <div className="content debug-border-green-lime">
         <AceEditor
           placeholder={`Copy your ${editorMode} content here...`}
           mode={editorMode}
@@ -48,9 +48,7 @@ const ContentPanel = ({ contentType, isDarkMode }: ContentPanelProps) => {
           }}
         />
       </div>
-      <div className="buttons-container debug-border-black-gray">
-        Buttons Container
-      </div>
+      <div className="buttons debug-border-black-gray">Buttons Container</div>
     </>
   );
 };

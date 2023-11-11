@@ -12,9 +12,11 @@ function App() {
   return (
     <div
       className={
-        isDarkMode ? "app full-screen dark-mode" : "app full-screen light-mode"
+        isDarkMode
+          ? "app app--full-screen app--dark-mode"
+          : "app app--full-screen app--light-mode"
       }>
-      <div className="flex-item-navbar ">
+      <div className="app__navbar">
         <NavBar
           isDarkMode={isDarkMode}
           setIsDarkMode={setIsDarkMode}
@@ -22,7 +24,7 @@ function App() {
           setContentType={setContentType}
         />
       </div>
-      <div className="flex-item-layout">
+      <div className="app__layout">
         <Layout contentType={contentType} isDarkMode={isDarkMode} />
       </div>
     </div>
