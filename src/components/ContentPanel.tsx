@@ -5,6 +5,7 @@ import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/mode-xml";
 import "ace-builds/src-noconflict/theme-monokai";
+import "ace-builds/src-noconflict/ext-language_tools";
 
 interface ContentPanelProps {
   contentType: ContentType;
@@ -24,7 +25,7 @@ const ContentPanel = ({ contentType, isDarkMode }: ContentPanelProps) => {
 
   return (
     <>
-      <div className="content debug-border-green-lime">
+      <div className="content">
         <AceEditor
           placeholder={`Copy your ${editorMode} content here...`}
           mode={editorMode}
