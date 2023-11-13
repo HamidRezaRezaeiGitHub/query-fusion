@@ -5,7 +5,9 @@ import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/mode-xml";
 import "ace-builds/src-noconflict/theme-monokai";
+import "ace-builds/src-noconflict/theme-chrome";
 import "ace-builds/src-noconflict/ext-language_tools";
+import { useState } from "react";
 
 interface ContentPanelProps {
   contentType: ContentType;
@@ -13,13 +15,18 @@ interface ContentPanelProps {
 }
 
 const ContentPanel = ({ contentType, isDarkMode }: ContentPanelProps) => {
+  const [content, setContent] = useState("");
   const editorMode = contentType === ContentType.JSON ? "json" : "xml";
+  const lightTheme = "chrome";
+  const darkTheme = "monokai";
+  const editorTheme = isDarkMode ? darkTheme : lightTheme;
 
   const onLoad = () => {
     console.log("Editor loaded");
   };
 
   const onChange = (newValue: string) => {
+    setContent(newValue);
     console.log("Change", newValue);
   };
 
@@ -29,7 +36,7 @@ const ContentPanel = ({ contentType, isDarkMode }: ContentPanelProps) => {
         <AceEditor
           placeholder={`Copy your ${editorMode} content here...`}
           mode={editorMode}
-          theme="monokai"
+          theme={editorTheme}
           name="editor"
           onLoad={onLoad}
           onChange={onChange}
@@ -37,7 +44,7 @@ const ContentPanel = ({ contentType, isDarkMode }: ContentPanelProps) => {
           showPrintMargin={false}
           showGutter={true}
           highlightActiveLine={true}
-          value={``}
+          value={content}
           height="100%"
           width="100%"
           setOptions={{
