@@ -3,10 +3,10 @@ import { EditorFocus } from "../types/EditorFocus";
 import { ContentSpecificValues } from "../models/ContentSpecificValues";
 import { DefaultContentSpecificValues } from "../models/DefaultContentSpecificValues";
 import ContentPanel from "./ContentPanel";
-import QueryPanel from "./QueryPanel";
 import "../styles/debug.css";
 import "../styles/Layout.css";
 import { useState } from "react";
+import QueryResultPanel from "./QueryResultPanel";
 
 interface LayoutProps {
   contentType: ContentType;
@@ -71,8 +71,15 @@ const Layout = ({
         />
       </div>
       <div className="layout__divider"></div>
-      <div className="layout__query-panel">
-        <QueryPanel contentType={contentType} isDarkMode={isDarkMode} />
+      <div className="layout__query-result-panel">
+        <QueryResultPanel
+          contentType={contentType}
+          contentSpecificMap={contentSpecificMap}
+          onQueryChange={handleQueryChange}
+          isDarkMode={isDarkMode}
+          focusedEditor={focusedEditor}
+          setFocusedEditor={setFocusedEditor}
+        />
       </div>
     </div>
   );
