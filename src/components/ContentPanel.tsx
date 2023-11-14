@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { ContentType } from "../types/ContentType";
 import { EditorFocus } from "../types/EditorFocus";
+import { ContentSpecificValues } from "../models/ContentSpecificValues";
 import AceEditor from "react-ace";
 import "../styles/ContentPanel.css";
 import "../styles/debug.css";
@@ -12,7 +13,7 @@ import "ace-builds/src-noconflict/ext-language_tools";
 
 interface ContentPanelProps {
   contentType: ContentType;
-  contentEditorValues: Map<ContentType, string>;
+  contentSpecificMap: Map<ContentType, ContentSpecificValues>;
   onContentChange: (contentType: ContentType, newContent: string) => void;
   isDarkMode: boolean;
   focusedEditor: EditorFocus;
@@ -21,7 +22,7 @@ interface ContentPanelProps {
 
 const ContentPanel = ({
   contentType,
-  contentEditorValues,
+  contentSpecificMap,
   onContentChange,
   isDarkMode,
   focusedEditor,
@@ -48,9 +49,9 @@ const ContentPanel = ({
 
   const onLoad = () => {
     console.log(
-      `content-editor loaded with value: ${contentEditorValues.get(
-        contentType
-      )}`
+      `content-editor loaded with value: ${
+        contentSpecificMap.get(contentType)?.content || ""
+      }`
     );
   };
 
@@ -80,8 +81,8 @@ const ContentPanel = ({
           showGutter={true}
           highlightActiveLine={true}
           value={
-            contentEditorValues.has(contentType)
-              ? contentEditorValues.get(contentType)
+            contentSpecificMap.has(contentType)
+              ? contentSpecificMap.get(contentType)?.content
               : ""
           }
           height="100%"

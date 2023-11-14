@@ -1,5 +1,7 @@
 import { ContentType } from "../types/ContentType";
 import { EditorFocus } from "../types/EditorFocus";
+import { ContentSpecificValues } from "../models/ContentSpecificValues";
+import { DefaultContentSpecificValues } from "../models/DefaultContentSpecificValues";
 import ContentPanel from "./ContentPanel";
 import QueryPanel from "./QueryPanel";
 import "../styles/debug.css";
@@ -19,22 +21,41 @@ const Layout = ({
   focusedEditor,
   setFocusedEditor,
 }: LayoutProps) => {
-  const [contentEditorValues, setContentEditorValues] = useState<
-    Map<ContentType, string>
+  const [contentSpecificMap, setContentSpecificMap] = useState<
+    Map<ContentType, ContentSpecificValues>
   >(new Map());
 
   const handleContentChange = (
     contentType: ContentType,
     newContent: string
   ) => {
-    // Create a new Map based on the existing map
-    const updatedContents = new Map(contentEditorValues);
+    const updatedContentSpecificMap = new Map(contentSpecificMap);
+    const currentContentSpecificValues =
+      updatedContentSpecificMap.get(contentType) ||
+      new DefaultContentSpecificValues();
+    currentContentSpecificValues.content = newContent;
+    updatedContentSpecificMap.set(contentType, currentContentSpecificValues);
+    setContentSpecificMap(updatedContentSpecificMap);
+  };
 
-    // Update the new map with the new content
-    updatedContents.set(contentType, newContent);
+  const handleQueryChange = (contentType: ContentType, newQuery: string) => {
+    const updatedContentSpecificMap = new Map(contentSpecificMap);
+    const currentContentSpecificValues =
+      updatedContentSpecificMap.get(contentType) ||
+      new DefaultContentSpecificValues();
+    currentContentSpecificValues.query = newQuery;
+    updatedContentSpecificMap.set(contentType, currentContentSpecificValues);
+    setContentSpecificMap(updatedContentSpecificMap);
+  };
 
-    // Set the state with the updated map
-    setContentEditorValues(updatedContents);
+  const handleResultChange = (contentType: ContentType, newresult: string) => {
+    const updatedContentSpecificMap = new Map(contentSpecificMap);
+    const currentContentSpecificValues =
+      updatedContentSpecificMap.get(contentType) ||
+      new DefaultContentSpecificValues();
+    currentContentSpecificValues.result = newresult;
+    updatedContentSpecificMap.set(contentType, currentContentSpecificValues);
+    setContentSpecificMap(updatedContentSpecificMap);
   };
 
   return (
@@ -42,7 +63,7 @@ const Layout = ({
       <div className="layout__content-panel">
         <ContentPanel
           contentType={contentType}
-          contentEditorValues={contentEditorValues}
+          contentSpecificMap={contentSpecificMap}
           onContentChange={handleContentChange}
           isDarkMode={isDarkMode}
           focusedEditor={focusedEditor}
