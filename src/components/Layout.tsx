@@ -4,6 +4,7 @@ import ContentPanel from "./ContentPanel";
 import QueryPanel from "./QueryPanel";
 import "../styles/debug.css";
 import "../styles/Layout.css";
+import { useState } from "react";
 
 interface LayoutProps {
   contentType: ContentType;
@@ -18,11 +19,31 @@ const Layout = ({
   focusedEditor,
   setFocusedEditor,
 }: LayoutProps) => {
+  const [contentEditorValues, setContentEditorValues] = useState<
+    Map<ContentType, string>
+  >(new Map());
+
+  const handleContentChange = (
+    contentType: ContentType,
+    newContent: string
+  ) => {
+    // Create a new Map based on the existing map
+    const updatedContents = new Map(contentEditorValues);
+
+    // Update the new map with the new content
+    updatedContents.set(contentType, newContent);
+
+    // Set the state with the updated map
+    setContentEditorValues(updatedContents);
+  };
+
   return (
     <div className="layout">
       <div className="layout__content-panel">
         <ContentPanel
           contentType={contentType}
+          contentEditorValues={contentEditorValues}
+          onContentChange={handleContentChange}
           isDarkMode={isDarkMode}
           focusedEditor={focusedEditor}
           setFocusedEditor={setFocusedEditor}

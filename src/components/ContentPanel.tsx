@@ -12,6 +12,8 @@ import "ace-builds/src-noconflict/ext-language_tools";
 
 interface ContentPanelProps {
   contentType: ContentType;
+  contentEditorValues: Map<ContentType, string>;
+  onContentChange: (contentType: ContentType, newContent: string) => void;
   isDarkMode: boolean;
   focusedEditor: EditorFocus;
   setFocusedEditor: (editor: EditorFocus) => void;
@@ -19,11 +21,12 @@ interface ContentPanelProps {
 
 const ContentPanel = ({
   contentType,
+  contentEditorValues,
+  onContentChange,
   isDarkMode,
   focusedEditor,
   setFocusedEditor,
 }: ContentPanelProps) => {
-  const [content, setContent] = useState("");
   const editorMode = contentType === ContentType.JSON ? "json" : "xml";
   const lightTheme = "chrome";
   const darkTheme = "monokai";
@@ -44,12 +47,15 @@ const ContentPanel = ({
   }, [contentType]);
 
   const onLoad = () => {
-    console.log("Editor loaded");
+    console.log(
+      `content-editor loaded with value: ${contentEditorValues.get(
+        contentType
+      )}`
+    );
   };
 
   const onChange = (newValue: string) => {
-    setContent(newValue);
-    console.log("Change", newValue);
+    onContentChange(contentType, newValue);
   };
 
   const onFocus = () => {
@@ -73,7 +79,11 @@ const ContentPanel = ({
           showPrintMargin={false}
           showGutter={true}
           highlightActiveLine={true}
-          value={content}
+          value={
+            contentEditorValues.has(contentType)
+              ? contentEditorValues.get(contentType)
+              : ""
+          }
           height="100%"
           width="100%"
           setOptions={{
