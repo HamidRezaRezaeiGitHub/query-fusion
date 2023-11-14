@@ -2,12 +2,17 @@ import "./App.css";
 import "./styles/debug.css";
 import NavBar from "./components/NavBar";
 import Layout from "./components/Layout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ContentType } from "./types/ContentType";
+import { EditorFocus } from "./types/EditorFocus";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
   const [contentType, setContentType] = useState<ContentType>(ContentType.XML);
+  const [focusedEditor, setFocusedEditor] = useState(EditorFocus.Content);
+  useEffect(() => {
+    console.log(`Editor in focus: ${focusedEditor}`);
+  }, [focusedEditor]);
 
   return (
     <div
@@ -25,7 +30,12 @@ function App() {
         />
       </div>
       <div className="app__layout">
-        <Layout contentType={contentType} isDarkMode={isDarkMode} />
+        <Layout
+          contentType={contentType}
+          isDarkMode={isDarkMode}
+          focusedEditor={focusedEditor}
+          setFocusedEditor={setFocusedEditor}
+        />
       </div>
     </div>
   );
