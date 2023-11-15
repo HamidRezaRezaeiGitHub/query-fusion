@@ -59,7 +59,7 @@ const ResultPanel = ({
   return (
     <div className="result" onClick={onFocus}>
       <AceEditor
-        placeholder={`query result will be here...`}
+        placeholder={`Query result will be here...`}
         mode={editorMode}
         theme={editorTheme}
         name="result-editor"

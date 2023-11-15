@@ -25,37 +25,35 @@ const Layout = ({
     Map<ContentType, ContentSpecificValues>
   >(new Map());
 
-  const handleContentChange = (
+  const handleEditorChange = (
     contentType: ContentType,
-    newContent: string
+    key: keyof ContentSpecificValues,
+    newValue: string
   ) => {
     const updatedContentSpecificMap = new Map(contentSpecificMap);
     const currentContentSpecificValues =
       updatedContentSpecificMap.get(contentType) ||
       new DefaultContentSpecificValues();
-    currentContentSpecificValues.content = newContent;
+
+    currentContentSpecificValues[key] = newValue;
+
     updatedContentSpecificMap.set(contentType, currentContentSpecificValues);
     setContentSpecificMap(updatedContentSpecificMap);
+  };
+
+  const handleContentChange = (
+    contentType: ContentType,
+    newContent: string
+  ) => {
+    handleEditorChange(contentType, "content", newContent);
   };
 
   const handleQueryChange = (contentType: ContentType, newQuery: string) => {
-    const updatedContentSpecificMap = new Map(contentSpecificMap);
-    const currentContentSpecificValues =
-      updatedContentSpecificMap.get(contentType) ||
-      new DefaultContentSpecificValues();
-    currentContentSpecificValues.query = newQuery;
-    updatedContentSpecificMap.set(contentType, currentContentSpecificValues);
-    setContentSpecificMap(updatedContentSpecificMap);
+    handleEditorChange(contentType, "query", newQuery);
   };
 
-  const handleResultChange = (contentType: ContentType, newresult: string) => {
-    const updatedContentSpecificMap = new Map(contentSpecificMap);
-    const currentContentSpecificValues =
-      updatedContentSpecificMap.get(contentType) ||
-      new DefaultContentSpecificValues();
-    currentContentSpecificValues.result = newresult;
-    updatedContentSpecificMap.set(contentType, currentContentSpecificValues);
-    setContentSpecificMap(updatedContentSpecificMap);
+  const handleResultChange = (contentType: ContentType, newResult: string) => {
+    handleEditorChange(contentType, "result", newResult);
   };
 
   return (
@@ -70,7 +68,6 @@ const Layout = ({
           setFocusedEditor={setFocusedEditor}
         />
       </div>
-      <div className="layout__divider"></div>
       <div className="layout__query-result-panel">
         <QueryResultPanel
           contentType={contentType}
