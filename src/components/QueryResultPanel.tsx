@@ -9,7 +9,8 @@ import { EditorFocus } from "../types/EditorFocus";
 interface QueryResultPanelProps {
   contentType: ContentType;
   contentSpecificMap: Map<ContentType, ContentSpecificValues>;
-  onQueryChange: (contentType: ContentType, newContent: string) => void;
+  onQueryChange: (contentType: ContentType, newQuery: string) => void;
+  onResultChange: (contentType: ContentType, newResult: string) => void;
   isDarkMode: boolean;
   focusedEditor: EditorFocus;
   setFocusedEditor: (editor: EditorFocus) => void;
@@ -19,6 +20,7 @@ const QueryResultPanel = ({
   contentType,
   contentSpecificMap,
   onQueryChange,
+  onResultChange,
   isDarkMode,
   focusedEditor,
   setFocusedEditor,
@@ -35,8 +37,15 @@ const QueryResultPanel = ({
           setFocusedEditor={setFocusedEditor}
         />
       </div>
-      <div className="query-result__result-panel debug-border-navy-lightblue">
-        <ResultPanel contentType={contentType} isDarkMode={isDarkMode} />
+      <div className="query-result__result-panel">
+        <ResultPanel
+          contentType={contentType}
+          contentSpecificMap={contentSpecificMap}
+          onResultChange={onResultChange}
+          isDarkMode={isDarkMode}
+          focusedEditor={focusedEditor}
+          setFocusedEditor={setFocusedEditor}
+        />
       </div>
     </>
   );

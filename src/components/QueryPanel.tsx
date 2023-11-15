@@ -14,7 +14,7 @@ import "ace-builds/src-noconflict/ext-language_tools";
 interface QueryPanelProps {
   contentType: ContentType;
   contentSpecificMap: Map<ContentType, ContentSpecificValues>;
-  onQueryChange: (contentType: ContentType, newContent: string) => void;
+  onQueryChange: (contentType: ContentType, newQuery: string) => void;
   isDarkMode: boolean;
   focusedEditor: EditorFocus;
   setFocusedEditor: (editor: EditorFocus) => void;

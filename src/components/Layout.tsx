@@ -76,6 +76,7 @@ const Layout = ({
           contentType={contentType}
           contentSpecificMap={contentSpecificMap}
           onQueryChange={handleQueryChange}
+          onResultChange={handleResultChange}
           isDarkMode={isDarkMode}
           focusedEditor={focusedEditor}
           setFocusedEditor={setFocusedEditor}

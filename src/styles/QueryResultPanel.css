@@ -5,4 +5,5 @@
 
 .query-result__result-panel {
   flex: 1;
+  display: flex;
 }
