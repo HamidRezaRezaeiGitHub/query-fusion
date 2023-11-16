@@ -28,11 +28,37 @@ const ContentPanel = ({
   focusedEditor,
   setFocusedEditor,
 }: ContentPanelProps) => {
-  const editorMode = contentType === ContentType.JSON ? "json" : "xml";
+  const editorMode = contentType.toLowerCase();
   const lightTheme = "chrome";
   const darkTheme = "monokai";
   const editorTheme = isDarkMode ? darkTheme : lightTheme;
   const editorRef = useRef<any>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileButtonClick = () => {
+    if (fileInputRef && fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) {
+      console.log("FileList returned by the HTMLInputElement is null!");
+      return;
+    }
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (readEvent: ProgressEvent<FileReader>) => {
+        const fileContent = readEvent.target!.result as string;
+        // Check if file content is valid XML or JSON
+        onContentChange(contentType, fileContent);
+      };
+      reader.readAsText(file);
+    } else {
+      console.error("Invalid file type. Only .txt files are allowed.");
+    }
+  };
 
   useEffect(() => {
     if (focusedEditor === EditorFocus.Content && editorRef.current) {
@@ -97,7 +123,32 @@ const ContentPanel = ({
           }}
         />
       </div>
-      <div className="buttons debug-border-black-gray">Buttons Container</div>
+      <div className="buttons debug-border-black-gray">
+        <input
+          type="file"
+          ref={fileInputRef}
+          style={{ display: "none" }}
+          accept={`.txt, .${contentType.toLowerCase()}`}
+          onChange={handleFileChange}
+        />
+        <button
+          className="btn btn-primary buttons__upload"
+          onClick={handleFileButtonClick}>
+          Upload File
+        </button>
+        <button
+          className="buttons__clear"
+          onClick={() => console.log("Clear button")}
+          disabled={false}>
+          Clear
+        </button>
+        <button
+          className="buttons__format"
+          onClick={() => console.log("Upload button")}
+          disabled={false}>
+          Format Content
+        </button>
+      </div>
     </>
   );
 };
