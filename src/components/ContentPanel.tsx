@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { ContentType } from "../types/ContentType";
 import { EditorFocus } from "../types/EditorFocus";
 import { ContentSpecificValues } from "../models/ContentSpecificValues";
+import contentValidator from "../services/contentValidator";
 import AceEditor from "react-ace";
 import "../styles/ContentPanel.css";
 import "../styles/debug.css";
@@ -15,6 +16,7 @@ interface ContentPanelProps {
   contentType: ContentType;
   contentSpecificMap: Map<ContentType, ContentSpecificValues>;
   onContentChange: (contentType: ContentType, newContent: string) => void;
+  setIsContentValid: (isContentValid: boolean) => void;
   isDarkMode: boolean;
   focusedEditor: EditorFocus;
   setFocusedEditor: (editor: EditorFocus) => void;
@@ -24,6 +26,7 @@ const ContentPanel = ({
   contentType,
   contentSpecificMap,
   onContentChange,
+  setIsContentValid,
   isDarkMode,
   focusedEditor,
   setFocusedEditor,
@@ -46,6 +49,12 @@ const ContentPanel = ({
       setFocusedEditor(EditorFocus.Content);
       editorRef.current.editor.focus();
     }
+    setIsContentValid(
+      contentValidator.isContentValid(
+        contentType,
+        contentSpecificMap.get(contentType)?.content || ""
+      )
+    );
   }, [contentType]);
 
   const onLoad = () => {
@@ -58,6 +67,7 @@ const ContentPanel = ({
 
   const onChange = (newValue: string) => {
     onContentChange(contentType, newValue);
+    setIsContentValid(contentValidator.isContentValid(contentType, newValue));
   };
 
   const onFocus = () => {
@@ -77,7 +87,6 @@ const ContentPanel = ({
     const reader = new FileReader();
     reader.onload = (readEvent: ProgressEvent<FileReader>) => {
       const fileContent = readEvent.target!.result as string;
-      // Check if file content is valid XML or JSON
       onChange(fileContent);
     };
     reader.readAsText(file);
@@ -91,7 +100,7 @@ const ContentPanel = ({
     <>
       <div className="content" onClick={onFocus}>
         <AceEditor
-          placeholder={`Copy your ${editorMode} content here...`}
+          placeholder={`Copy your ${editorMode.toUpperCase()} content here...`}
           mode={editorMode}
           theme={editorTheme}
           name="content-editor"
@@ -104,11 +113,7 @@ const ContentPanel = ({
           showPrintMargin={false}
           showGutter={true}
           highlightActiveLine={true}
-          value={
-            contentSpecificMap.has(contentType)
-              ? contentSpecificMap.get(contentType)?.content
-              : ""
-          }
+          value={contentSpecificMap.get(contentType)?.content || ""}
           height="100%"
           width="100%"
           setOptions={{

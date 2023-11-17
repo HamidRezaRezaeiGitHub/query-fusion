@@ -15,6 +15,7 @@ interface QueryPanelProps {
   contentType: ContentType;
   contentSpecificMap: Map<ContentType, ContentSpecificValues>;
   onQueryChange: (contentType: ContentType, newQuery: string) => void;
+  isContentValid: boolean;
   isDarkMode: boolean;
   focusedEditor: EditorFocus;
   setFocusedEditor: (editor: EditorFocus) => void;
@@ -24,11 +25,12 @@ const QueryPanel = ({
   contentType,
   contentSpecificMap,
   onQueryChange,
+  isContentValid,
   isDarkMode,
   focusedEditor,
   setFocusedEditor,
 }: QueryPanelProps) => {
-  const editorMode = contentType === ContentType.JSON ? "json" : "xml";
+  const editorMode = contentType.toLowerCase();
   const lightTheme = "chrome";
   const darkTheme = "monokai";
   const editorTheme = isDarkMode ? darkTheme : lightTheme;
@@ -59,7 +61,11 @@ const QueryPanel = ({
   return (
     <div className="query" onClick={onFocus}>
       <AceEditor
-        placeholder={`Copy your ${editorMode} query here...`}
+        placeholder={
+          isContentValid
+            ? `Copy your ${editorMode.toUpperCase()} query here...`
+            : `Content is not a valid ${editorMode.toUpperCase()} yet!`
+        }
         mode={editorMode}
         theme={editorTheme}
         name="query-editor"
@@ -72,6 +78,7 @@ const QueryPanel = ({
         showPrintMargin={false}
         showGutter={true}
         highlightActiveLine={true}
+        readOnly={!isContentValid}
         value={
           contentSpecificMap.has(contentType)
             ? contentSpecificMap.get(contentType)?.query

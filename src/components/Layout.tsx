@@ -24,6 +24,7 @@ const Layout = ({
   const [contentSpecificMap, setContentSpecificMap] = useState<
     Map<ContentType, ContentSpecificValues>
   >(new Map());
+  const [isContentValid, setIsContentValid] = useState(false);
 
   const handleEditorChange = (
     contentType: ContentType,
@@ -63,6 +64,7 @@ const Layout = ({
           contentType={contentType}
           contentSpecificMap={contentSpecificMap}
           onContentChange={handleContentChange}
+          setIsContentValid={setIsContentValid}
           isDarkMode={isDarkMode}
           focusedEditor={focusedEditor}
           setFocusedEditor={setFocusedEditor}
@@ -74,6 +76,7 @@ const Layout = ({
           contentSpecificMap={contentSpecificMap}
           onQueryChange={handleQueryChange}
           onResultChange={handleResultChange}
+          isContentValid={isContentValid}
           isDarkMode={isDarkMode}
           focusedEditor={focusedEditor}
           setFocusedEditor={setFocusedEditor}

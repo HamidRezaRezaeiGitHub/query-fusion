@@ -11,6 +11,7 @@ interface QueryResultPanelProps {
   contentSpecificMap: Map<ContentType, ContentSpecificValues>;
   onQueryChange: (contentType: ContentType, newQuery: string) => void;
   onResultChange: (contentType: ContentType, newResult: string) => void;
+  isContentValid: boolean;
   isDarkMode: boolean;
   focusedEditor: EditorFocus;
   setFocusedEditor: (editor: EditorFocus) => void;
@@ -21,6 +22,7 @@ const QueryResultPanel = ({
   contentSpecificMap,
   onQueryChange,
   onResultChange,
+  isContentValid,
   isDarkMode,
   focusedEditor,
   setFocusedEditor,
@@ -32,6 +34,7 @@ const QueryResultPanel = ({
           contentType={contentType}
           contentSpecificMap={contentSpecificMap}
           onQueryChange={onQueryChange}
+          isContentValid={isContentValid}
           isDarkMode={isDarkMode}
           focusedEditor={focusedEditor}
           setFocusedEditor={setFocusedEditor}

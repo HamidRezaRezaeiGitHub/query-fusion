@@ -28,7 +28,7 @@ const ResultPanel = ({
   focusedEditor,
   setFocusedEditor,
 }: ResultPanelProps) => {
-  const editorMode = contentType === ContentType.JSON ? "json" : "xml";
+  const editorMode = contentType.toLowerCase();
   const lightTheme = "chrome";
   const darkTheme = "monokai";
   const editorTheme = isDarkMode ? darkTheme : lightTheme;
@@ -72,11 +72,8 @@ const ResultPanel = ({
         showPrintMargin={false}
         showGutter={true}
         highlightActiveLine={true}
-        value={
-          contentSpecificMap.has(contentType)
-            ? contentSpecificMap.get(contentType)?.result
-            : ""
-        }
+        readOnly={true}
+        value={contentSpecificMap.get(contentType)?.result || ""}
         height="100%"
         width="100%"
         setOptions={{
