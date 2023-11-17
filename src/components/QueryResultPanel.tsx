@@ -5,13 +5,14 @@ import "../styles/QueryResultPanel.css";
 import "../styles/debug.css";
 import { ContentSpecificValues } from "../models/ContentSpecificValues";
 import { EditorFocus } from "../types/EditorFocus";
+import { ValidationResponse } from "../types/ValidationResponse";
 
 interface QueryResultPanelProps {
   contentType: ContentType;
   contentSpecificMap: Map<ContentType, ContentSpecificValues>;
   onQueryChange: (contentType: ContentType, newQuery: string) => void;
   onResultChange: (contentType: ContentType, newResult: string) => void;
-  isContentValid: boolean;
+  validationResponse: ValidationResponse;
   isDarkMode: boolean;
   focusedEditor: EditorFocus;
   setFocusedEditor: (editor: EditorFocus) => void;
@@ -22,7 +23,7 @@ const QueryResultPanel = ({
   contentSpecificMap,
   onQueryChange,
   onResultChange,
-  isContentValid,
+  validationResponse,
   isDarkMode,
   focusedEditor,
   setFocusedEditor,
@@ -34,7 +35,7 @@ const QueryResultPanel = ({
           contentType={contentType}
           contentSpecificMap={contentSpecificMap}
           onQueryChange={onQueryChange}
-          isContentValid={isContentValid}
+          validationResponse={validationResponse}
           isDarkMode={isDarkMode}
           focusedEditor={focusedEditor}
           setFocusedEditor={setFocusedEditor}

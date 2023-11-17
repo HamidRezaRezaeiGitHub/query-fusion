@@ -10,12 +10,13 @@ import "ace-builds/src-noconflict/mode-xml";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/theme-chrome";
 import "ace-builds/src-noconflict/ext-language_tools";
+import { ValidationResponse } from "../types/ValidationResponse";
 
 interface QueryPanelProps {
   contentType: ContentType;
   contentSpecificMap: Map<ContentType, ContentSpecificValues>;
   onQueryChange: (contentType: ContentType, newQuery: string) => void;
-  isContentValid: boolean;
+  validationResponse: ValidationResponse;
   isDarkMode: boolean;
   focusedEditor: EditorFocus;
   setFocusedEditor: (editor: EditorFocus) => void;
@@ -25,7 +26,7 @@ const QueryPanel = ({
   contentType,
   contentSpecificMap,
   onQueryChange,
-  isContentValid,
+  validationResponse,
   isDarkMode,
   focusedEditor,
   setFocusedEditor,
@@ -62,9 +63,11 @@ const QueryPanel = ({
     <div className="query" onClick={onFocus}>
       <AceEditor
         placeholder={
-          isContentValid
+          validationResponse.isValid
             ? `Copy your ${editorMode.toUpperCase()} query here...`
-            : `Content is not a valid ${editorMode.toUpperCase()} yet!`
+            : `Content is not a valid ${editorMode.toUpperCase()} yet!\n${
+                validationResponse.validationError
+              }`
         }
         mode={editorMode}
         theme={editorTheme}
@@ -78,12 +81,8 @@ const QueryPanel = ({
         showPrintMargin={false}
         showGutter={true}
         highlightActiveLine={true}
-        readOnly={!isContentValid}
-        value={
-          contentSpecificMap.has(contentType)
-            ? contentSpecificMap.get(contentType)?.query
-            : ""
-        }
+        readOnly={!validationResponse.isValid}
+        value={contentSpecificMap.get(contentType)?.query || ""}
         height="100%"
         width="100%"
         setOptions={{

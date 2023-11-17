@@ -11,12 +11,13 @@ import "ace-builds/src-noconflict/mode-xml";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/theme-chrome";
 import "ace-builds/src-noconflict/ext-language_tools";
+import { ValidationResponse } from "../types/ValidationResponse";
 
 interface ContentPanelProps {
   contentType: ContentType;
   contentSpecificMap: Map<ContentType, ContentSpecificValues>;
   onContentChange: (contentType: ContentType, newContent: string) => void;
-  setIsContentValid: (isContentValid: boolean) => void;
+  setValidationResponse: (validationResponse: ValidationResponse) => void;
   isDarkMode: boolean;
   focusedEditor: EditorFocus;
   setFocusedEditor: (editor: EditorFocus) => void;
@@ -26,7 +27,7 @@ const ContentPanel = ({
   contentType,
   contentSpecificMap,
   onContentChange,
-  setIsContentValid,
+  setValidationResponse,
   isDarkMode,
   focusedEditor,
   setFocusedEditor,
@@ -49,7 +50,7 @@ const ContentPanel = ({
       setFocusedEditor(EditorFocus.Content);
       editorRef.current.editor.focus();
     }
-    setIsContentValid(
+    setValidationResponse(
       contentValidator.isContentValid(
         contentType,
         contentSpecificMap.get(contentType)?.content || ""
@@ -67,7 +68,9 @@ const ContentPanel = ({
 
   const onChange = (newValue: string) => {
     onContentChange(contentType, newValue);
-    setIsContentValid(contentValidator.isContentValid(contentType, newValue));
+    setValidationResponse(
+      contentValidator.isContentValid(contentType, newValue)
+    );
   };
 
   const onFocus = () => {

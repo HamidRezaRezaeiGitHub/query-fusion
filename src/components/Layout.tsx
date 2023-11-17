@@ -7,6 +7,7 @@ import "../styles/debug.css";
 import "../styles/Layout.css";
 import { useState } from "react";
 import QueryResultPanel from "./QueryResultPanel";
+import { ValidationResponse } from "../types/ValidationResponse";
 
 interface LayoutProps {
   contentType: ContentType;
@@ -24,7 +25,11 @@ const Layout = ({
   const [contentSpecificMap, setContentSpecificMap] = useState<
     Map<ContentType, ContentSpecificValues>
   >(new Map());
-  const [isContentValid, setIsContentValid] = useState(false);
+  const [validationResponse, setValidationResponse] =
+    useState<ValidationResponse>({
+      isValid: false,
+      validationError: "",
+    });
 
   const handleEditorChange = (
     contentType: ContentType,
@@ -64,7 +69,7 @@ const Layout = ({
           contentType={contentType}
           contentSpecificMap={contentSpecificMap}
           onContentChange={handleContentChange}
-          setIsContentValid={setIsContentValid}
+          setValidationResponse={setValidationResponse}
           isDarkMode={isDarkMode}
           focusedEditor={focusedEditor}
           setFocusedEditor={setFocusedEditor}
@@ -76,7 +81,7 @@ const Layout = ({
           contentSpecificMap={contentSpecificMap}
           onQueryChange={handleQueryChange}
           onResultChange={handleResultChange}
-          isContentValid={isContentValid}
+          validationResponse={validationResponse}
           isDarkMode={isDarkMode}
           focusedEditor={focusedEditor}
           setFocusedEditor={setFocusedEditor}
