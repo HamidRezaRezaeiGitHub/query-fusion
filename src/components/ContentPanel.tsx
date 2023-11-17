@@ -35,31 +35,6 @@ const ContentPanel = ({
   const editorRef = useRef<any>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileButtonClick = () => {
-    if (fileInputRef && fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files) {
-      console.log("FileList returned by the HTMLInputElement is null!");
-      return;
-    }
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (readEvent: ProgressEvent<FileReader>) => {
-        const fileContent = readEvent.target!.result as string;
-        // Check if file content is valid XML or JSON
-        onContentChange(contentType, fileContent);
-      };
-      reader.readAsText(file);
-    } else {
-      console.error("Invalid file type. Only .txt files are allowed.");
-    }
-  };
-
   useEffect(() => {
     if (focusedEditor === EditorFocus.Content && editorRef.current) {
       editorRef.current.editor.focus();
@@ -87,6 +62,29 @@ const ContentPanel = ({
 
   const onFocus = () => {
     setFocusedEditor(EditorFocus.Content);
+  };
+
+  const handleFileUploadButtonClick = () => {
+    fileInputRef!.current!.click();
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) {
+      console.log("FileList returned by the HTMLInputElement is null!");
+      return;
+    }
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (readEvent: ProgressEvent<FileReader>) => {
+      const fileContent = readEvent.target!.result as string;
+      // Check if file content is valid XML or JSON
+      onChange(fileContent);
+    };
+    reader.readAsText(file);
+  };
+
+  const handleClearButton = () => {
+    onChange("");
   };
 
   return (
@@ -133,18 +131,18 @@ const ContentPanel = ({
         />
         <button
           className="btn btn-primary buttons__upload"
-          onClick={handleFileButtonClick}>
+          onClick={handleFileUploadButtonClick}>
           Upload File
         </button>
         <button
           className="buttons__clear"
-          onClick={() => console.log("Clear button")}
+          onClick={handleClearButton}
           disabled={false}>
           Clear
         </button>
         <button
           className="buttons__format"
-          onClick={() => console.log("Upload button")}
+          onClick={() => console.log("Format button clicked.")}
           disabled={false}>
           Format Content
         </button>
