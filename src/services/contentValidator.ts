@@ -7,7 +7,7 @@ class ContentValidator {
     content: string
   ): ValidationResponse {
     if (!content.trim()) {
-      return { isValid: false, validationError: "" };
+      return { isValid: false, validationError: "Error: (Empty content!)" };
     }
     switch (contentType) {
       case ContentType.JSON:
@@ -25,7 +25,7 @@ class ContentValidator {
       JSON.parse(content);
       return { isValid: true, validationError: "" };
     } catch (e: any) {
-      return { isValid: false, validationError: e.message };
+      return { isValid: false, validationError: `Error: ${e.message}` };
     }
   };
 
@@ -38,7 +38,7 @@ class ContentValidator {
       .replace("\nBelow is a rendering of the page up to the first error.", "");
     return {
       isValid: parseError.length === 0,
-      validationError: errorMsg,
+      validationError: `Error: ${errorMsg}`,
     };
   }
 

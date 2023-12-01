@@ -40,13 +40,7 @@ const ResultPanel = ({
     }
   }, [isDarkMode, focusedEditor]);
 
-  const onLoad = () => {
-    console.log(
-      `result-editor loaded with value: ${
-        contentSpecificMap.get(contentType)?.result || ""
-      }`
-    );
-  };
+  const onLoad = () => {};
 
   const onChange = (newValue: string) => {
     onResultChange(contentType, newValue);
@@ -83,6 +77,7 @@ const ResultPanel = ({
           showLineNumbers: true,
           tabSize: 4,
           useWorker: false,
+          wrap: true,
         }}
       />
     </div>

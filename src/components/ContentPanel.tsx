@@ -58,13 +58,7 @@ const ContentPanel = ({
     );
   }, [contentType]);
 
-  const onLoad = () => {
-    console.log(
-      `content-editor loaded with value: ${
-        contentSpecificMap.get(contentType)?.content || ""
-      }`
-    );
-  };
+  const onLoad = () => {};
 
   const onChange = (newValue: string) => {
     onContentChange(contentType, newValue);
@@ -126,6 +120,7 @@ const ContentPanel = ({
             showLineNumbers: true,
             tabSize: 4,
             useWorker: false,
+            wrap: true,
           }}
         />
       </div>

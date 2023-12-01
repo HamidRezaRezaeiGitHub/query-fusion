@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ContentType } from "../types/ContentType";
 import { EditorFocus } from "../types/EditorFocus";
 import { ContentSpecificValues } from "../models/ContentSpecificValues";
@@ -36,6 +36,8 @@ const QueryPanel = ({
   const darkTheme = "monokai";
   const editorTheme = isDarkMode ? darkTheme : lightTheme;
   const editorRef = useRef<any>(null);
+  const [placeholderValue, setPlaceHolderValue] = useState("");
+  const [editorValue, setEditorValue] = useState("");
 
   useEffect(() => {
     if (focusedEditor === EditorFocus.Query && editorRef.current) {
@@ -43,16 +45,55 @@ const QueryPanel = ({
     }
   }, [isDarkMode, focusedEditor]);
 
-  const onLoad = () => {
-    console.log(
-      `query-editor loaded with value: ${
-        contentSpecificMap.get(contentType)?.query || ""
-      }`
-    );
-  };
+  useEffect(() => {
+    if (validationResponse.isValid) {
+      setPlaceHolderValue(
+        `Enter your ${contentType.toUpperCase()} query here.`
+      );
+    } else {
+      setPlaceHolderValue(
+        `Once content's valid, enter your ${contentType.toUpperCase()} query here.`
+      );
+    }
+  }, [validationResponse]);
+
+  useEffect(() => {
+    onChange(contentSpecificMap.get(contentType)?.query || "");
+  }, [validationResponse, contentType]);
+
+  const onLoad = () => {};
 
   const onChange = (newValue: string) => {
-    onQueryChange(contentType, newValue);
+    if (validationResponse.isValid) {
+      onQueryChange(contentType, newValue);
+      setEditorValue(newValue);
+    } else {
+      if (isContentEmpty()) {
+        setEditorValue(""); // Placeholder will be displayed.
+      } else {
+        if (isQueryEmpty()) {
+          setEditorValue(
+            `You can enter your ${contentType.toUpperCase()} query here once content is valid.\n${
+              validationResponse.validationError
+            }`
+          );
+        } else {
+          setEditorValue(
+            `${contentType.toUpperCase()} query will be displayed here once content is valid.\n${
+              validationResponse.validationError
+            }`
+          );
+        }
+      }
+    }
+  };
+
+  const isQueryEmpty = () => {
+    return !contentSpecificMap.get(contentType)?.query?.trim();
+  };
+
+  const isContentEmpty = () => {
+    return !contentSpecificMap.get(contentType)?.content?.trim();
   };
 
   const onFocus = () => {
@@ -62,13 +103,7 @@ const QueryPanel = ({
   return (
     <div className="query" onClick={onFocus}>
       <AceEditor
-        placeholder={
-          validationResponse.isValid
-            ? `Copy your ${editorMode.toUpperCase()} query here...`
-            : `Content is not a valid ${editorMode.toUpperCase()} yet!\n${
-                validationResponse.validationError
-              }`
-        }
+        placeholder={placeholderValue}
         mode={editorMode}
         theme={editorTheme}
         name="query-editor"
@@ -81,8 +116,7 @@ const QueryPanel = ({
         showPrintMargin={false}
         showGutter={true}
         highlightActiveLine={true}
-        readOnly={!validationResponse.isValid}
-        value={contentSpecificMap.get(contentType)?.query || ""}
+        value={editorValue}
         height="100%"
         width="100%"
         setOptions={{
@@ -92,6 +126,7 @@ const QueryPanel = ({
           showLineNumbers: true,
           tabSize: 4,
           useWorker: false,
+          wrap: true,
         }}
       />
     </div>
