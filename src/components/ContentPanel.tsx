@@ -1,8 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ContentType } from "../types/ContentType";
 import { EditorFocus } from "../types/EditorFocus";
 import { ContentSpecificValues } from "../models/ContentSpecificValues";
-import contentValidator from "../services/contentValidator";
+import ContentValidator from "../services/ContentValidator";
+import ContentFormatter from "../services/ContentFormatter";
 import AceEditor from "react-ace";
 import "../styles/ContentPanel.css";
 import "../styles/debug.css";
@@ -38,6 +39,7 @@ const ContentPanel = ({
   const editorTheme = isDarkMode ? darkTheme : lightTheme;
   const editorRef = useRef<any>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isContentValid, setIsContentValid] = useState(false);
 
   useEffect(() => {
     if (focusedEditor === EditorFocus.Content && editorRef.current) {
@@ -50,21 +52,24 @@ const ContentPanel = ({
       setFocusedEditor(EditorFocus.Content);
       editorRef.current.editor.focus();
     }
-    setValidationResponse(
-      contentValidator.isContentValid(
-        contentType,
-        contentSpecificMap.get(contentType)?.content || ""
-      )
+    const validationResponse = ContentValidator.isContentValid(
+      contentType,
+      contentSpecificMap.get(contentType)?.content || ""
     );
+    setValidationResponse(validationResponse);
+    setIsContentValid(validationResponse.isValid);
   }, [contentType]);
 
   const onLoad = () => {};
 
   const onChange = (newValue: string) => {
     onContentChange(contentType, newValue);
-    setValidationResponse(
-      contentValidator.isContentValid(contentType, newValue)
+    const validationResponse = ContentValidator.isContentValid(
+      contentType,
+      newValue
     );
+    setValidationResponse(validationResponse);
+    setIsContentValid(validationResponse.isValid);
   };
 
   const onFocus = () => {
@@ -89,8 +94,26 @@ const ContentPanel = ({
     reader.readAsText(file);
   };
 
+  const isContentEmpty = () => {
+    return !contentSpecificMap.get(contentType)?.content?.trim();
+  };
+
   const handleClearButton = () => {
     onChange("");
+  };
+
+  const handleFormatButton = () => {
+    if (!isContentValid) {
+      console.log(
+        "As long as content is not valid, this function should not be called!"
+      );
+      return;
+    }
+    const formattedContent = ContentFormatter.formatContent(
+      contentType,
+      contentSpecificMap.get(contentType)?.content || ""
+    );
+    onChange(formattedContent);
   };
 
   return (
@@ -134,19 +157,20 @@ const ContentPanel = ({
         />
         <button
           className="btn btn-primary buttons__upload"
-          onClick={handleFileUploadButtonClick}>
+          onClick={handleFileUploadButtonClick}
+          disabled={false}>
           Upload File
         </button>
         <button
           className="buttons__clear"
           onClick={handleClearButton}
-          disabled={false}>
+          disabled={isContentEmpty()}>
           Clear
         </button>
         <button
           className="buttons__format"
-          onClick={() => console.log("Format button clicked.")}
-          disabled={false}>
+          onClick={handleFormatButton}
+          disabled={!isContentValid}>
           Format Content
         </button>
       </div>

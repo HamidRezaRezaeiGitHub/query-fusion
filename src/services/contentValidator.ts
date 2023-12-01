@@ -20,7 +20,7 @@ class ContentValidator {
     }
   }
 
-  private isValidJSON = (content: string) => {
+  private isValidJSON = (content: string): ValidationResponse => {
     try {
       JSON.parse(content);
       return { isValid: true, validationError: "" };
