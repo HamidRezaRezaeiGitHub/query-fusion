@@ -62,12 +62,24 @@ const Layout = ({
     handleEditorChange(contentType, "result", newResult);
   };
 
+  const getContent = (contentType: ContentType): string => {
+    return contentSpecificMap.get(contentType)?.content || "";
+  };
+
+  const getQuery = (contentType: ContentType): string => {
+    return contentSpecificMap.get(contentType)?.query || "";
+  };
+
+  const getResult = (contentType: ContentType): string => {
+    return contentSpecificMap.get(contentType)?.result || "";
+  };
+
   return (
     <div className="layout">
       <div className="layout__content-panel">
         <ContentPanel
           contentType={contentType}
-          contentSpecificMap={contentSpecificMap}
+          getContent={getContent}
           onContentChange={handleContentChange}
           setValidationResponse={setValidationResponse}
           isDarkMode={isDarkMode}
@@ -78,7 +90,9 @@ const Layout = ({
       <div className="layout__query-result-panel">
         <QueryResultPanel
           contentType={contentType}
-          contentSpecificMap={contentSpecificMap}
+          getContent={getContent}
+          getQuery={getQuery}
+          getResult={getResult}
           onQueryChange={handleQueryChange}
           onResultChange={handleResultChange}
           validationResponse={validationResponse}

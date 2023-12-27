@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ContentType } from "../types/ContentType";
 import { EditorFocus } from "../types/EditorFocus";
-import { ContentSpecificValues } from "../models/ContentSpecificValues";
 import ContentValidator from "../services/ContentValidator";
 import ContentFormatter from "../services/ContentFormatter";
 import AceEditor from "react-ace";
@@ -16,7 +15,7 @@ import { ValidationResponse } from "../types/ValidationResponse";
 
 interface ContentPanelProps {
   contentType: ContentType;
-  contentSpecificMap: Map<ContentType, ContentSpecificValues>;
+  getContent: (contentType: ContentType) => string;
   onContentChange: (contentType: ContentType, newContent: string) => void;
   setValidationResponse: (validationResponse: ValidationResponse) => void;
   isDarkMode: boolean;
@@ -26,7 +25,7 @@ interface ContentPanelProps {
 
 const ContentPanel = ({
   contentType,
-  contentSpecificMap,
+  getContent,
   onContentChange,
   setValidationResponse,
   isDarkMode,
@@ -54,7 +53,7 @@ const ContentPanel = ({
     }
     const validationResponse = ContentValidator.isContentValid(
       contentType,
-      contentSpecificMap.get(contentType)?.content || ""
+      getContent(contentType)
     );
     setValidationResponse(validationResponse);
     setIsContentValid(validationResponse.isValid);
@@ -95,7 +94,7 @@ const ContentPanel = ({
   };
 
   const isContentEmpty = () => {
-    return !contentSpecificMap.get(contentType)?.content?.trim();
+    return !getContent(contentType)?.trim();
   };
 
   const handleClearButton = () => {
@@ -111,7 +110,7 @@ const ContentPanel = ({
     }
     const formattedContent = ContentFormatter.formatContent(
       contentType,
-      contentSpecificMap.get(contentType)?.content || ""
+      getContent(contentType)
     );
     onChange(formattedContent);
   };
@@ -133,7 +132,7 @@ const ContentPanel = ({
           showPrintMargin={false}
           showGutter={true}
           highlightActiveLine={true}
-          value={contentSpecificMap.get(contentType)?.content || ""}
+          value={getContent(contentType)}
           height="100%"
           width="100%"
           setOptions={{

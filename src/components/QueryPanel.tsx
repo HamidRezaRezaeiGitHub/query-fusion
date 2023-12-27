@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ContentType } from "../types/ContentType";
 import { EditorFocus } from "../types/EditorFocus";
-import { ContentSpecificValues } from "../models/ContentSpecificValues";
 import AceEditor from "react-ace";
 import "../styles/QueryPanel.css";
 import "../styles/debug.css";
@@ -14,7 +13,8 @@ import { ValidationResponse } from "../types/ValidationResponse";
 
 interface QueryPanelProps {
   contentType: ContentType;
-  contentSpecificMap: Map<ContentType, ContentSpecificValues>;
+  getContent: (contentType: ContentType) => string;
+  getQuery: (contentType: ContentType) => string;
   onQueryChange: (contentType: ContentType, newQuery: string) => void;
   validationResponse: ValidationResponse;
   isDarkMode: boolean;
@@ -24,7 +24,8 @@ interface QueryPanelProps {
 
 const QueryPanel = ({
   contentType,
-  contentSpecificMap,
+  getContent,
+  getQuery,
   onQueryChange,
   validationResponse,
   isDarkMode,
@@ -58,7 +59,7 @@ const QueryPanel = ({
   }, [validationResponse]);
 
   useEffect(() => {
-    onChange(contentSpecificMap.get(contentType)?.query || "");
+    onChange(getQuery(contentType));
   }, [validationResponse, contentType]);
 
   const onLoad = () => {};
@@ -89,11 +90,11 @@ const QueryPanel = ({
   };
 
   const isQueryEmpty = () => {
-    return !contentSpecificMap.get(contentType)?.query?.trim();
+    return !getQuery(contentType)?.trim();
   };
 
   const isContentEmpty = () => {
-    return !contentSpecificMap.get(contentType)?.content?.trim();
+    return !getContent(contentType)?.trim();
   };
 
   const onFocus = () => {

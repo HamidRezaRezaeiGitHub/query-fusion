@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import { ContentSpecificValues } from "../models/ContentSpecificValues";
 import { ContentType } from "../types/ContentType";
 import { EditorFocus } from "../types/EditorFocus";
 import AceEditor from "react-ace";
@@ -13,7 +12,9 @@ import "ace-builds/src-noconflict/ext-language_tools";
 
 interface ResultPanelProps {
   contentType: ContentType;
-  contentSpecificMap: Map<ContentType, ContentSpecificValues>;
+  getContent: (contentType: ContentType) => string;
+  getQuery: (contentType: ContentType) => string;
+  getResult: (contentType: ContentType) => string;
   onResultChange: (contentType: ContentType, newResult: string) => void;
   isDarkMode: boolean;
   focusedEditor: EditorFocus;
@@ -22,7 +23,9 @@ interface ResultPanelProps {
 
 const ResultPanel = ({
   contentType,
-  contentSpecificMap,
+  getContent,
+  getQuery,
+  getResult,
   onResultChange,
   isDarkMode,
   focusedEditor,
@@ -67,7 +70,7 @@ const ResultPanel = ({
         showGutter={true}
         highlightActiveLine={true}
         readOnly={true}
-        value={contentSpecificMap.get(contentType)?.result || ""}
+        value={getResult(contentType)}
         height="100%"
         width="100%"
         setOptions={{
