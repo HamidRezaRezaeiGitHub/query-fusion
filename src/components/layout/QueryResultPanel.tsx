@@ -1,10 +1,10 @@
-import QueryPanel from "./QueryPanel";
-import { ContentType } from "../types/ContentType";
-import ResultPanel from "./ResultPanel";
+import QueryPanel from "../query/QueryPanel";
+import { ContentType } from "../../model/content/ContentType";
+import ResultPanel from "../result/ResultPanel";
 import "../styles/QueryResultPanel.css";
 import "../styles/debug.css";
-import { EditorFocus } from "../types/EditorFocus";
-import { ValidationResponse } from "../types/ValidationResponse";
+import { EditorFocus } from "../../model/editor/EditorFocus";
+import { ValidationResponse } from "../../model/validation/ValidationResponse";
 
 interface QueryResultPanelProps {
   contentType: ContentType;

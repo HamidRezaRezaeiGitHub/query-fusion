@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
-import { ContentType } from "../types/ContentType";
-import { EditorFocus } from "../types/EditorFocus";
+import { ContentType } from "../../model/content/ContentType";
+import { EditorFocus } from "../../model/editor/EditorFocus";
 import AceEditor from "react-ace";
 import "../styles/ResultPanel.css";
 import "../styles/debug.css";

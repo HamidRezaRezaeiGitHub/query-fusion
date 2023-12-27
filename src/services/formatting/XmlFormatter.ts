@@ -1,4 +1,4 @@
-import { IContentFormatter } from "../IContentFormatter";
+import { IContentFormatter } from "./IContentFormatter";
 import xmlFormatter from "xml-formatter";
 
 export class XmlFormatter implements IContentFormatter {

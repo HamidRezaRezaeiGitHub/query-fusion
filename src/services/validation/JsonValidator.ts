@@ -1,5 +1,5 @@
-import { IContentValidator } from "../IContentValidator";
-import { ValidationResponse } from "../../types/ValidationResponse";
+import { IContentValidator } from "./IContentValidator";
+import { ValidationResponse } from "../../model/validation/ValidationResponse";
 
 export class JsonValidator implements IContentValidator {
   isContentValid(content: string): ValidationResponse {

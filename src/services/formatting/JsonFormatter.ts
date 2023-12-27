@@ -1,4 +1,4 @@
-import { IContentFormatter } from "../IContentFormatter";
+import { IContentFormatter } from "./IContentFormatter";
 
 export class JsonFormatter implements IContentFormatter {
   formatContent(content: string): string {

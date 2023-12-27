@@ -1,13 +1,13 @@
-import { ContentType } from "../types/ContentType";
-import { EditorFocus } from "../types/EditorFocus";
-import { ContentSpecificValues } from "../models/ContentSpecificValues";
-import { DefaultContentSpecificValues } from "../models/DefaultContentSpecificValues";
-import ContentPanel from "./ContentPanel";
+import { ContentType } from "../../model/content/ContentType";
+import { EditorFocus } from "../../model/editor/EditorFocus";
+import { ContentSpecificValues } from "../../model/content/ContentSpecificValues";
+import { DefaultContentSpecificValues } from "../../model/content/DefaultContentSpecificValues";
+import ContentPanel from "../content/ContentPanel";
 import "../styles/debug.css";
 import "../styles/Layout.css";
 import { useState } from "react";
 import QueryResultPanel from "./QueryResultPanel";
-import { ValidationResponse } from "../types/ValidationResponse";
+import { ValidationResponse } from "../../model/validation/ValidationResponse";
 
 interface LayoutProps {
   contentType: ContentType;

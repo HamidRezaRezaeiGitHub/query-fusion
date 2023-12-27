@@ -1,8 +1,8 @@
-import { ContentType } from "../types/ContentType";
-import { QueryResponse } from "../types/QueryResponse";
+import { ContentType } from "../../model/content/ContentType";
+import { QueryResponse } from "../../model/query/QueryResponse";
 import { IContentQuerent } from "./IContentQuerent";
-import { JsonQuerent } from "./json/JsonQuerent";
-import { XmlQuerent } from "./xml/XmlQuerent";
+import { JsonQuerent } from "./JsonQuerent";
+import { XmlQuerent } from "./XmlQuerent";
 
 class ContentQuerent {
   private jsonQuerent: IContentQuerent = new JsonQuerent();

@@ -1,5 +1,5 @@
-import { QueryResponse } from "../../types/QueryResponse";
-import { IContentQuerent } from "../IContentQuerent";
+import { QueryResponse } from "../../model/query/QueryResponse";
+import { IContentQuerent } from "./IContentQuerent";
 import jsonpath from "jsonpath";
 
 export class JsonQuerent implements IContentQuerent {

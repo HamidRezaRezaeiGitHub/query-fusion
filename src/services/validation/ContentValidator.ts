@@ -1,8 +1,8 @@
-import { ContentType } from "../types/ContentType";
-import { ValidationResponse } from "../types/ValidationResponse";
+import { ContentType } from "../../model/content/ContentType";
+import { ValidationResponse } from "../../model/validation/ValidationResponse";
 import { IContentValidator } from "./IContentValidator";
-import { JsonValidator } from "./json/JsonValidator";
-import { XmlValidator } from "./xml/XmlValidator";
+import { JsonValidator } from "./JsonValidator";
+import { XmlValidator } from "./XmlValidator";
 
 class ContentValidator {
   private jsonValidator: IContentValidator = new JsonValidator();

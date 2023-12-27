@@ -1,10 +1,10 @@
 import "./App.css";
 import "./styles/debug.css";
-import NavBar from "./components/NavBar";
-import Layout from "./components/Layout";
+import NavBar from "./components/navbar/NavBar";
+import Layout from "./components/layout/Layout";
 import { useEffect, useState } from "react";
-import { ContentType } from "./types/ContentType";
-import { EditorFocus } from "./types/EditorFocus";
+import { ContentType } from "./model/content/ContentType";
+import { EditorFocus } from "./model/editor/EditorFocus";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);

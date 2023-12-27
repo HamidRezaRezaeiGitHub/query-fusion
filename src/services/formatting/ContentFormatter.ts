@@ -1,7 +1,7 @@
-import { ContentType } from "../types/ContentType";
+import { ContentType } from "../../model/content/ContentType";
 import { IContentFormatter } from "./IContentFormatter";
-import { JsonFormatter } from "./json/JsonFormatter";
-import { XmlFormatter } from "./xml/XmlFormatter";
+import { JsonFormatter } from "./JsonFormatter";
+import { XmlFormatter } from "./XmlFormatter";
 
 class ContentFormatter {
   private jsonFormatter: IContentFormatter = new JsonFormatter();

@@ -1,5 +1,5 @@
-import { QueryResponse } from "../../types/QueryResponse";
-import { IContentQuerent } from "../IContentQuerent";
+import { QueryResponse } from "../../model/query/QueryResponse";
+import { IContentQuerent } from "./IContentQuerent";
 import { DOMParser, XMLSerializer } from "xmldom";
 import xpath from "xpath";
 
