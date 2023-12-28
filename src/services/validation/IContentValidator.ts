@@ -1,5 +1,5 @@
-import { ValidationResponse } from "../../model/validation/ValidationResponse";
+import { IValidationResponse } from "../../model/validation/IValidationResponse";
 
 export interface IContentValidator {
-  isContentValid(content: string): ValidationResponse;
+  isContentValid(content: string): IValidationResponse;
 }

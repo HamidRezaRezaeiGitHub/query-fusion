@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ContentType } from "../../model/content/ContentType";
 import { EditorFocus } from "../../model/editor/EditorFocus";
-import { ValidationResponse } from "../../model/validation/ValidationResponse";
+import { IValidationResponse } from "../../model/validation/IValidationResponse";
 import ContentValidator from "../../services/validation/ContentValidator";
 import ContentFormatter from "../../services/formatting/ContentFormatter";
 import AceEditor from "react-ace";
@@ -17,7 +17,7 @@ interface ContentPanelProps {
   contentType: ContentType;
   getContent: (contentType: ContentType) => string;
   onContentChange: (contentType: ContentType, newContent: string) => void;
-  setValidationResponse: (validationResponse: ValidationResponse) => void;
+  setValidationResponse: (validationResponse: IValidationResponse) => void;
   isDarkMode: boolean;
   focusedEditor: EditorFocus;
   setFocusedEditor: (editor: EditorFocus) => void;

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ContentType } from "../../model/content/ContentType";
 import { EditorFocus } from "../../model/editor/EditorFocus";
-import { ValidationResponse } from "../../model/validation/ValidationResponse";
+import { IValidationResponse } from "../../model/validation/IValidationResponse";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/mode-xml";
@@ -16,7 +16,7 @@ interface QueryPanelProps {
   getContent: (contentType: ContentType) => string;
   getQuery: (contentType: ContentType) => string;
   onQueryChange: (contentType: ContentType, newQuery: string) => void;
-  validationResponse: ValidationResponse;
+  validationResponse: IValidationResponse;
   isDarkMode: boolean;
   focusedEditor: EditorFocus;
   setFocusedEditor: (editor: EditorFocus) => void;
@@ -47,7 +47,7 @@ const QueryPanel = ({
   }, [isDarkMode, focusedEditor]);
 
   useEffect(() => {
-    if (validationResponse.isValid) {
+    if (validationResponse.isValid()) {
       setPlaceHolderValue(
         `Enter your ${contentType.toUpperCase()} query here.`
       );
@@ -65,7 +65,7 @@ const QueryPanel = ({
   const onLoad = () => {};
 
   const onChange = (newValue: string) => {
-    if (validationResponse.isValid) {
+    if (validationResponse.isValid()) {
       onQueryChange(contentType, newValue);
       setEditorValue(newValue);
     } else {
@@ -74,15 +74,11 @@ const QueryPanel = ({
       } else {
         if (isQueryEmpty()) {
           setEditorValue(
-            `You can enter your ${contentType.toUpperCase()} query here once content is valid.\n${
-              validationResponse.validationError
-            }`
+            `You can enter your ${contentType.toUpperCase()} query here once content is valid.\n${validationResponse.getValidationError()}`
           );
         } else {
           setEditorValue(
-            `${contentType.toUpperCase()} query will be displayed here once content is valid.\n${
-              validationResponse.validationError
-            }`
+            `${contentType.toUpperCase()} query will be displayed here once content is valid.\n${validationResponse.getValidationError()}`
           );
         }
       }

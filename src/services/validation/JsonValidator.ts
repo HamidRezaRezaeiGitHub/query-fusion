@@ -1,13 +1,14 @@
 import { IContentValidator } from "./IContentValidator";
-import { ValidationResponse } from "../../model/validation/ValidationResponse";
+import { IValidationResponse } from "../../model/validation/IValidationResponse";
+import { DefaultValidationResponse } from "../../model/validation/DefaultValidationResponse";
 
 export class JsonValidator implements IContentValidator {
-  isContentValid(content: string): ValidationResponse {
+  isContentValid(content: string): IValidationResponse {
     try {
       JSON.parse(content);
-      return { isValid: true, validationError: "" };
+      return new DefaultValidationResponse(true, "");
     } catch (e: any) {
-      return { isValid: false, validationError: `Error: ${e.message}` };
+      return new DefaultValidationResponse(false, `Error: ${e.message}`);
     }
   }
 }

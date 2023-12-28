@@ -1,5 +1,6 @@
 import { ContentType } from "../../model/content/ContentType";
-import { ValidationResponse } from "../../model/validation/ValidationResponse";
+import { DefaultValidationResponse } from "../../model/validation/DefaultValidationResponse";
+import { IValidationResponse } from "../../model/validation/IValidationResponse";
 import { IContentValidator } from "./IContentValidator";
 import { JsonValidator } from "./JsonValidator";
 import { XmlValidator } from "./XmlValidator";
@@ -11,9 +12,9 @@ class ContentValidator {
   public isContentValid(
     contentType: ContentType,
     content: string
-  ): ValidationResponse {
+  ): IValidationResponse {
     if (!content?.trim()) {
-      return { isValid: false, validationError: "Error: (Empty content!)" };
+      return new DefaultValidationResponse(false, "Error: (Empty content!)");
     }
     switch (contentType) {
       case ContentType.JSON:
@@ -22,7 +23,7 @@ class ContentValidator {
         return this.xmlValidator.isContentValid(content);
       // Add cases for other content types
       default:
-        return { isValid: false, validationError: "Unsupported content type" };
+        return new DefaultValidationResponse(false, "Unsupported content type");
     }
   }
 }

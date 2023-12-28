@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { ContentType } from "../../model/content/ContentType";
 import { EditorFocus } from "../../model/editor/EditorFocus";
-import { ValidationResponse } from "../../model/validation/ValidationResponse";
+import { IValidationResponse } from "../../model/validation/IValidationResponse";
 import { IContentSpecificMap } from "../../model/content/IContentSpecificMap";
 import { DefaultContentSpecificMap } from "../../model/content/DefaultContentSpecificMap";
+import { DefaultValidationResponse } from "../../model/validation/DefaultValidationResponse";
 import ContentPanel from "../content/ContentPanel";
 import QueryResultPanel from "./QueryResultPanel";
 import "./Layout.css";
@@ -25,10 +26,7 @@ const Layout = ({
   const [contentSpecificMap, setContentSpecificMap] =
     useState<IContentSpecificMap>(new DefaultContentSpecificMap());
   const [validationResponse, setValidationResponse] =
-    useState<ValidationResponse>({
-      isValid: false,
-      validationError: "",
-    });
+    useState<IValidationResponse>(new DefaultValidationResponse(false, ""));
 
   return (
     <div className="layout">

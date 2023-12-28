@@ -1,6 +1,6 @@
 import { ContentType } from "../../model/content/ContentType";
 import { EditorFocus } from "../../model/editor/EditorFocus";
-import { ValidationResponse } from "../../model/validation/ValidationResponse";
+import { IValidationResponse } from "../../model/validation/IValidationResponse";
 import QueryPanel from "../query/QueryPanel";
 import ResultPanel from "../result/ResultPanel";
 import "./QueryResultPanel.css";
@@ -13,7 +13,7 @@ interface QueryResultPanelProps {
   getResult: (contentType: ContentType) => string;
   onQueryChange: (contentType: ContentType, newQuery: string) => void;
   onResultChange: (contentType: ContentType, newResult: string) => void;
-  validationResponse: ValidationResponse;
+  validationResponse: IValidationResponse;
   isDarkMode: boolean;
   focusedEditor: EditorFocus;
   setFocusedEditor: (editor: EditorFocus) => void;
