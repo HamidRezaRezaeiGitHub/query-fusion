@@ -2,13 +2,13 @@ import { useEffect, useRef } from "react";
 import { ContentType } from "../../model/content/ContentType";
 import { EditorFocus } from "../../model/editor/EditorFocus";
 import AceEditor from "react-ace";
-import "../styles/ResultPanel.css";
-import "../styles/debug.css";
 import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/mode-xml";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/theme-chrome";
 import "ace-builds/src-noconflict/ext-language_tools";
+import "./ResultPanel.css";
+import "../../styles/debug.css";
 
 interface ResultPanelProps {
   contentType: ContentType;

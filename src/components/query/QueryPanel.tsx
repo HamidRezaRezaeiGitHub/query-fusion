@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { ContentType } from "../../model/content/ContentType";
 import { EditorFocus } from "../../model/editor/EditorFocus";
+import { ValidationResponse } from "../../model/validation/ValidationResponse";
 import AceEditor from "react-ace";
-import "../styles/QueryPanel.css";
-import "../styles/debug.css";
 import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/mode-xml";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/theme-chrome";
 import "ace-builds/src-noconflict/ext-language_tools";
-import { ValidationResponse } from "../../model/validation/ValidationResponse";
+import "./QueryPanel.css";
+import "../../styles/debug.css";
 
 interface QueryPanelProps {
   contentType: ContentType;

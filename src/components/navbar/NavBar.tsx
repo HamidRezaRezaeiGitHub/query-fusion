@@ -1,10 +1,10 @@
 import { Nav, NavDropdown, Navbar } from "react-bootstrap";
-import "../styles/debug.css";
-import "../styles/NavBar.css";
 import { ContentType } from "../../model/content/ContentType";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import "./NavBar.css";
+import "../../styles/debug.css";
 
 interface NavBarProps {
   isDarkMode: boolean;
