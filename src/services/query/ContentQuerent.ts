@@ -1,5 +1,5 @@
 import { ContentType } from "../../model/content/ContentType";
-import { QueryResponse } from "../../model/query/QueryResponse";
+import { IQueryResponse } from "../../model/query/IQueryResponse";
 import { IContentQuerent } from "./IContentQuerent";
 import { JsonQuerent } from "./JsonQuerent";
 import { XmlQuerent } from "./XmlQuerent";
@@ -12,7 +12,7 @@ class ContentQuerent {
     contentType: ContentType,
     content: string,
     queries: string[]
-  ): QueryResponse[] {
+  ): IQueryResponse[] {
     switch (contentType) {
       case ContentType.JSON:
         return this.jsonQuerent.queryContent(content, queries);

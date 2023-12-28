@@ -1,5 +1,5 @@
-import { QueryResponse } from "../../model/query/QueryResponse";
+import { IQueryResponse } from "../../model/query/IQueryResponse";
 
 export interface IContentQuerent {
-  queryContent(content: string, queries: string[]): QueryResponse[];
+  queryContent(content: string, queries: string[]): IQueryResponse[];
 }
