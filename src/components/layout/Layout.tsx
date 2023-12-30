@@ -6,7 +6,8 @@ import { IContentSpecificMap } from "../../model/content/IContentSpecificMap";
 import { DefaultContentSpecificMap } from "../../model/content/DefaultContentSpecificMap";
 import { DefaultValidationResponse } from "../../model/validation/DefaultValidationResponse";
 import ContentPanel from "../content/ContentPanel";
-import QueryResultPanel from "./QueryResultPanel";
+import QueryPanel from "../query/QueryPanel";
+import ResultPanel from "../result/ResultPanel";
 import "./Layout.css";
 import "../../styles/debug.css";
 
@@ -42,18 +43,30 @@ const Layout = ({
         />
       </div>
       <div className="layout__query-result-panel">
-        <QueryResultPanel
-          contentType={contentType}
-          getContent={contentSpecificMap.getContent}
-          getQuery={contentSpecificMap.getQuery}
-          getResult={contentSpecificMap.getResult}
-          onQueryChange={contentSpecificMap.setQuery}
-          onResultChange={contentSpecificMap.setResult}
-          validationResponse={validationResponse}
-          isDarkMode={isDarkMode}
-          focusedEditor={focusedEditor}
-          setFocusedEditor={setFocusedEditor}
-        />
+        <div className="layout__query-panel">
+          <QueryPanel
+            contentType={contentType}
+            getContent={contentSpecificMap.getContent}
+            getQuery={contentSpecificMap.getQuery}
+            onQueryChange={contentSpecificMap.setQuery}
+            validationResponse={validationResponse}
+            isDarkMode={isDarkMode}
+            focusedEditor={focusedEditor}
+            setFocusedEditor={setFocusedEditor}
+          />
+        </div>
+        <div className="layout__result-panel">
+          <ResultPanel
+            contentType={contentType}
+            getContent={contentSpecificMap.getContent}
+            getQuery={contentSpecificMap.getQuery}
+            getResult={contentSpecificMap.getResult}
+            onResultChange={contentSpecificMap.setResult}
+            isDarkMode={isDarkMode}
+            focusedEditor={focusedEditor}
+            setFocusedEditor={setFocusedEditor}
+          />
+        </div>
       </div>
     </div>
   );
