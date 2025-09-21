@@ -51,3 +51,18 @@ QueryFusion is a Vite-powered React + TypeScript single-page application for exp
 
 No automated test suite is currently defined; feature behavior can be validated manually through the running application.
 
+## To-Do List
+
+To finish the UI-only QueryFusion experience (no accounts, no persistence, and no data collection), work through the following tasks:
+
+1. **Design polish and responsiveness** – Audit the three-panel layout on common breakpoints, tightening spacing, typography, and iconography so the interface feels cohesive on both desktop and tablet widths.
+2. **Editor affordances** – Add inline guidance in each editor panel (placeholder text, tooltips, empty-state messaging) to clarify how users can paste/upload content, craft queries, and interpret results without requiring documentation.
+3. **Validation feedback** – Enhance the validation messaging area with color, icons, and succinct copy that make JSON/XML issues immediately clear while remaining entirely client-side.
+4. **Result visualization** – Provide alternative renderers (tree view for JSON, formatted markup for XML) that help users inspect complex responses without leaving the browser.
+5. **Theme refinements** – Revisit the light/dark theme palette to ensure accessible contrast ratios and consistent styling across all components.
+6. **Keyboard and screen reader support** – Confirm that focus order, ARIA labels, and skip links enable complete navigation and usage without a mouse.
+7. **Sample content shortcuts** – Offer quick actions that populate the editors with demo JSON/XML snippets so users can try the tool instantly while keeping everything local to the session.
+8. **In-browser help modal** – Create a lightweight help/about modal summarizing capabilities, privacy assurances (client-only processing, no data storage), and external resources.
+9. **Performance review** – Profile the client bundle, eliminating unnecessary dependencies and enabling lazy loading where possible to keep the UI fast.
+10. **Manual QA checklist** – Document a manual test pass covering the JSON and XML workflows, theme toggling, formatting, and validation—all within the browser.
+
