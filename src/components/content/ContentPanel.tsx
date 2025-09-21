@@ -5,6 +5,7 @@ import { IValidationResponse } from "../../model/validation/IValidationResponse"
 import ContentValidator from "../../services/validation/ContentValidator";
 import ContentFormatter from "../../services/formatting/ContentFormatter";
 import AceEditor from "react-ace";
+import type ReactAce from "react-ace";
 import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/mode-xml";
 import "ace-builds/src-noconflict/theme-monokai";
@@ -36,7 +37,7 @@ const ContentPanel = ({
   const lightTheme = "chrome";
   const darkTheme = "monokai";
   const editorTheme = isDarkMode ? darkTheme : lightTheme;
-  const editorRef = useRef<any>(null);
+  const editorRef = useRef<ReactAce | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isContentValid, setIsContentValid] = useState(false);
 
@@ -44,7 +45,7 @@ const ContentPanel = ({
     if (focusedEditor === EditorFocus.Content && editorRef.current) {
       editorRef.current.editor.focus();
     }
-  }, [isDarkMode, focusedEditor]);
+  }, [focusedEditor]);
 
   useEffect(() => {
     if (editorRef.current) {
@@ -57,7 +58,7 @@ const ContentPanel = ({
     );
     setValidationResponse(validationResponse);
     setIsContentValid(validationResponse.isValid);
-  }, [contentType]);
+  }, [contentType, getContent, setFocusedEditor, setValidationResponse]);
 
   const onLoad = () => {};
 

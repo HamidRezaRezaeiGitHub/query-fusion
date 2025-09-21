@@ -4,6 +4,15 @@ import { IContentQuerent } from "./IContentQuerent";
 import { DOMParser, XMLSerializer } from "xmldom";
 import xpath from "xpath";
 
+const isNode = (value: unknown): value is Node => {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "nodeType" in value &&
+    typeof (value as { nodeType?: unknown }).nodeType === "number"
+  );
+};
+
 export class XmlQuerent implements IContentQuerent {
   queryContent(content: string, queries: string[]): IQueryResponse[] {
     const doc = new DOMParser().parseFromString(content);
@@ -11,26 +20,23 @@ export class XmlQuerent implements IContentQuerent {
   }
 
   private processQuery(doc: Document, query: string): IQueryResponse {
-    let queryResponseBuilder = DefaultQueryResponse.builder();
+    const queryResponseBuilder = DefaultQueryResponse.builder();
     try {
-      let result = xpath.select(query, doc);
+      let result: unknown = xpath.select(query, doc);
       queryResponseBuilder.setQueryValidity(true);
       // converting single Node result to an Array<Node> with 1 element
-      if (
-        result &&
-        typeof result === "object" &&
-        !Array.isArray(result) &&
-        result.nodeType
-      ) {
+      if (isNode(result)) {
         result = [result];
       }
 
       if (Array.isArray(result)) {
         const stringValue = result
           .map((node) =>
-            node.nodeType === node.TEXT_NODE
-              ? node.nodeValue
-              : new XMLSerializer().serializeToString(node)
+            isNode(node)
+              ? node.nodeType === node.TEXT_NODE
+                ? node.nodeValue ?? ""
+                : new XMLSerializer().serializeToString(node)
+              : String(node)
           )
           .join("\n");
         queryResponseBuilder
@@ -44,10 +50,11 @@ export class XmlQuerent implements IContentQuerent {
           .setStringResult(String(result))
           .setIsArray(false);
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : "Unknown error";
       queryResponseBuilder
         .setQueryValidity(false)
-        .setValidationError(error.message);
+        .setValidationError(message);
     }
 
     return queryResponseBuilder.build();

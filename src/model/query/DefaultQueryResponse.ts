@@ -6,7 +6,7 @@ export class DefaultQueryResponse implements IQueryResponse {
   private hasResultValue: boolean;
   private stringResult: string;
   private isArray: boolean;
-  private resultArray: Array<Node>;
+  private resultArray: Array<unknown>;
 
   constructor(builder: DefaultQueryResponseBuilder) {
     this.isValidQuery = builder.isValidQuery;
@@ -36,7 +36,7 @@ export class DefaultQueryResponse implements IQueryResponse {
   isResultArray = (): boolean => {
     return this.isArray;
   };
-  getArrayResult = (): Node[] => {
+  getArrayResult = (): Array<unknown> => {
     return this.resultArray;
   };
 }
@@ -47,7 +47,7 @@ class DefaultQueryResponseBuilder {
   hasResultValue: boolean = false;
   stringResult: string = "";
   isArray: boolean = false;
-  resultArray: Array<Node> = Array.of();
+  resultArray: Array<unknown> = Array.of();
 
   setQueryValidity(isValid: boolean): DefaultQueryResponseBuilder {
     this.isValidQuery = isValid;
@@ -74,7 +74,7 @@ class DefaultQueryResponseBuilder {
     return this;
   }
 
-  setResultArray(resultArray: Array<Node>): DefaultQueryResponseBuilder {
+  setResultArray(resultArray: Array<unknown>): DefaultQueryResponseBuilder {
     this.resultArray = resultArray;
     return this;
   }

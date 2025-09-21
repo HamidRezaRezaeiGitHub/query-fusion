@@ -4,5 +4,5 @@ export interface IQueryResponse {
   hasResult(): boolean;
   getStringResultValu(): string;
   isResultArray(): boolean;
-  getArrayResult(): Array<Node>;
+  getArrayResult(): Array<unknown>;
 }

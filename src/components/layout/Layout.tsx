@@ -24,8 +24,9 @@ const Layout = ({
   focusedEditor,
   setFocusedEditor,
 }: LayoutProps) => {
-  const [contentSpecificMap, setContentSpecificMap] =
-    useState<IContentSpecificMap>(new DefaultContentSpecificMap());
+  const [contentSpecificMap] = useState<IContentSpecificMap>(
+    () => new DefaultContentSpecificMap(),
+  );
   const [validationResponse, setValidationResponse] =
     useState<IValidationResponse>(new DefaultValidationResponse(false, ""));
 
@@ -58,8 +59,6 @@ const Layout = ({
         <div className="layout__result-panel">
           <ResultPanel
             contentType={contentType}
-            getContent={contentSpecificMap.getContent}
-            getQuery={contentSpecificMap.getQuery}
             getResult={contentSpecificMap.getResult}
             onResultChange={contentSpecificMap.setResult}
             isDarkMode={isDarkMode}

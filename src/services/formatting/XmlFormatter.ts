@@ -8,8 +8,14 @@ export class XmlFormatter implements IContentFormatter {
         indentation: "    ",
         collapseContent: true,
       });
-    } catch (e: any) {
-      console.log(`Could not parse or formt the XML content! ${e.message}`);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(
+          `Could not parse or formt the XML content! ${error.message}`
+        );
+      } else {
+        console.log("Could not parse or formt the XML content!");
+      }
       return content;
     }
   }

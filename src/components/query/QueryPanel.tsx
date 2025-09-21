@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ContentType } from "../../model/content/ContentType";
 import { EditorFocus } from "../../model/editor/EditorFocus";
 import { IValidationResponse } from "../../model/validation/IValidationResponse";
 import AceEditor from "react-ace";
+import type ReactAce from "react-ace";
 import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/mode-xml";
 import "ace-builds/src-noconflict/theme-monokai";
@@ -36,15 +37,23 @@ const QueryPanel = ({
   const lightTheme = "chrome";
   const darkTheme = "monokai";
   const editorTheme = isDarkMode ? darkTheme : lightTheme;
-  const editorRef = useRef<any>(null);
+  const editorRef = useRef<ReactAce | null>(null);
   const [placeholderValue, setPlaceHolderValue] = useState("");
   const [editorValue, setEditorValue] = useState("");
+
+  const isQueryEmpty = useCallback(() => {
+    return !getQuery(contentType)?.trim();
+  }, [contentType, getQuery]);
+
+  const isContentEmpty = useCallback(() => {
+    return !getContent(contentType)?.trim();
+  }, [contentType, getContent]);
 
   useEffect(() => {
     if (focusedEditor === EditorFocus.Query && editorRef.current) {
       editorRef.current.editor.focus();
     }
-  }, [isDarkMode, focusedEditor]);
+  }, [focusedEditor]);
 
   useEffect(() => {
     if (validationResponse.isValid()) {
@@ -56,11 +65,37 @@ const QueryPanel = ({
         `Once content's valid, enter your ${contentType.toUpperCase()} query here.`
       );
     }
-  }, [validationResponse]);
+  }, [contentType, validationResponse]);
 
   useEffect(() => {
-    onChange(getQuery(contentType));
-  }, [validationResponse, contentType]);
+    if (validationResponse.isValid()) {
+      setEditorValue(getQuery(contentType));
+      return;
+    }
+
+    if (isContentEmpty()) {
+      setEditorValue("");
+      return;
+    }
+
+    if (isQueryEmpty()) {
+      setEditorValue(
+        `You can enter your ${contentType.toUpperCase()} query here once content is valid.\n${validationResponse.getValidationError()}`
+      );
+      return;
+    }
+
+    setEditorValue(
+      `${contentType.toUpperCase()} query will be displayed here once content is valid.\n${validationResponse.getValidationError()}`
+    );
+  }, [
+    contentType,
+    getContent,
+    getQuery,
+    isContentEmpty,
+    isQueryEmpty,
+    validationResponse,
+  ]);
 
   const onLoad = () => {};
 
@@ -83,14 +118,6 @@ const QueryPanel = ({
         }
       }
     }
-  };
-
-  const isQueryEmpty = () => {
-    return !getQuery(contentType)?.trim();
-  };
-
-  const isContentEmpty = () => {
-    return !getContent(contentType)?.trim();
   };
 
   const onFocus = () => {
