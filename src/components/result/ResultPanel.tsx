@@ -12,8 +12,6 @@ import "../../styles/debug.css";
 
 interface ResultPanelProps {
   contentType: ContentType;
-  getContent: (contentType: ContentType) => string;
-  getQuery: (contentType: ContentType) => string;
   getResult: (contentType: ContentType) => string;
   onResultChange: (contentType: ContentType, newResult: string) => void;
   isDarkMode: boolean;
@@ -23,8 +21,6 @@ interface ResultPanelProps {
 
 const ResultPanel = ({
   contentType,
-  getContent,
-  getQuery,
   getResult,
   onResultChange,
   isDarkMode,
