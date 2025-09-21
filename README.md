@@ -1,27 +1,53 @@
-# React + TypeScript + Vite
+# QueryFusion
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+QueryFusion is a Vite-powered React + TypeScript single-page application for exploring JSON and XML documents. It provides a three-panel layout where users can paste or upload content, compose queries, and review results with helpful tooling such as syntax highlighting, validation, and formatting utilities.
 
-Currently, two official plugins are available:
+## Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Dual content support** – Toggle between JSON and XML workflows through the navigation bar; each content type keeps its own content, query, and results using an internal `DefaultContentSpecificMap` store.
+- **Rich editing experience** – All three panels use Ace Editor with autocompletion, theming, and focus management so keyboard users can quickly switch between the content, query, and result panes.
+- **Content validation and formatting** – Validation is handled by the `ContentValidator`, delegating to JSON or XML validators to surface parsing issues in real time. When content is valid, the formatter service can pretty-print it for easier inspection.
+- **Query execution services** – Queries are processed client-side via `jsonpath` for JSON documents and `xpath` with `xmldom` for XML. Responses are normalized into `IQueryResponse` objects for consistent rendering.
+- **User experience helpers** – Includes dark/light theme switching, GitHub link, and responsive layout built with React Bootstrap and Font Awesome icons.
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```
+├── src
+│   ├── components
+│   │   ├── content/       # Content editor panel (upload, clear, format controls)
+│   │   ├── query/         # Query editor with validation-aware messaging
+│   │   ├── result/        # Read-only result viewer fed by query services
+│   │   ├── layout/        # Orchestrates panel composition and shared state
+│   │   └── navbar/        # Branding, theme toggle, and content type selector
+│   ├── model/             # TypeScript models for content, queries, and validation
+│   ├── services/          # Formatting, validation, and query service classes
+│   └── styles/            # Shared styling helpers
+├── public                 # Static assets (e.g., favicon, logo)
+├── index.html             # Vite entry point
+└── package.json           # Tooling configuration
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Getting Started
+
+1. **Install dependencies**
+   ```bash
+   npm install
+   ```
+2. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+3. **Build for production**
+   ```bash
+   npm run build
+   ```
+4. **Preview the production build**
+   ```bash
+   npm run preview
+   ```
+
+## Testing
+
+No automated test suite is currently defined; feature behavior can be validated manually through the running application.
+
