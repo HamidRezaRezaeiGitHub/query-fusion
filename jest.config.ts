@@ -15,11 +15,14 @@ const config: Config = {
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },
   setupFilesAfterEnv: ['<rootDir>/test/setupTests.ts'],
-  globals: {
-    'ts-jest': {
-      tsconfig: './tsconfig.json',
-      useESM: true,
-    },
+  transform: {
+    '^.+\\.(ts|tsx)$': [
+      'ts-jest',
+      {
+        tsconfig: './tsconfig.json',
+        useESM: true,
+      },
+    ],
   },
 };
 
