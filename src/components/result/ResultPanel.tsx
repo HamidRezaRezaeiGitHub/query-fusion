@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { ContentType } from "../../model/content/ContentType";
 import { EditorFocus } from "../../model/editor/EditorFocus";
 import AceEditor from "react-ace";
+import type ReactAce from "react-ace";
 import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/mode-xml";
 import "ace-builds/src-noconflict/theme-monokai";
@@ -31,13 +32,13 @@ const ResultPanel = ({
   const lightTheme = "chrome";
   const darkTheme = "monokai";
   const editorTheme = isDarkMode ? darkTheme : lightTheme;
-  const editorRef = useRef<any>(null);
+  const editorRef = useRef<ReactAce | null>(null);
 
   useEffect(() => {
     if (focusedEditor === EditorFocus.Result && editorRef.current) {
       editorRef.current.editor.focus();
     }
-  }, [isDarkMode, focusedEditor]);
+  }, [focusedEditor]);
 
   const onLoad = () => {};
 

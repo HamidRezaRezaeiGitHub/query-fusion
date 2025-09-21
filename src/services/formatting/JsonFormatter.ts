@@ -5,8 +5,14 @@ export class JsonFormatter implements IContentFormatter {
     try {
       const parsed = JSON.parse(content);
       return JSON.stringify(parsed, null, 2); // Beautify JSON
-    } catch (e: any) {
-      console.log(`Could not parse or beutify the JSON content! ${e.message}`);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(
+          `Could not parse or beutify the JSON content! ${error.message}`
+        );
+      } else {
+        console.log("Could not parse or beutify the JSON content!");
+      }
       return content;
     }
   }

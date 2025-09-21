@@ -7,8 +7,10 @@ export class JsonValidator implements IContentValidator {
     try {
       JSON.parse(content);
       return new DefaultValidationResponse(true, "");
-    } catch (e: any) {
-      return new DefaultValidationResponse(false, `Error: ${e.message}`);
+    } catch (error: unknown) {
+      const message =
+        error instanceof Error ? error.message : "Unknown validation error";
+      return new DefaultValidationResponse(false, `Error: ${message}`);
     }
   }
 }

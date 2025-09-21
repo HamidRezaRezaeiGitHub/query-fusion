@@ -9,10 +9,10 @@ export class JsonQuerent implements IContentQuerent {
     return queries.map((query) => this.processQuery(json, query));
   }
 
-  private processQuery(json: any, query: string): IQueryResponse {
-    let queryResponseBuilder = DefaultQueryResponse.builder();
+  private processQuery(json: unknown, query: string): IQueryResponse {
+    const queryResponseBuilder = DefaultQueryResponse.builder();
     try {
-      let result = jsonpath.query(json, query);
+      let result: unknown[] = jsonpath.query(json, query);
       queryResponseBuilder.setQueryValidity(true);
       // Convert single result to an array for consistency
       if (!Array.isArray(result)) {
@@ -23,10 +23,11 @@ export class JsonQuerent implements IContentQuerent {
         .setStringResult(JSON.stringify(result, null, 2))
         .setIsArray(Array.isArray(result) && result.length > 1)
         .setResultArray(result);
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : "Unknown error";
       queryResponseBuilder
         .setQueryValidity(false)
-        .setValidationError(error.message);
+        .setValidationError(message);
     }
 
     return queryResponseBuilder.build();
