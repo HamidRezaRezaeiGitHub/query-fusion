@@ -150,7 +150,7 @@ const ContentPanel = ({
       </div>
       
       {/* Buttons */}
-      <div className="flex gap-1 h-10">
+      <div className="flex gap-1">
         <input
           type="file"
           ref={fileInputRef}
@@ -161,21 +161,21 @@ const ContentPanel = ({
         <Button
           onClick={handleFileUploadButtonClick}
           disabled={false}
-          className="flex-1 h-full">
+          className="flex-1">
           Upload File
         </Button>
         <Button
           variant="secondary"
           onClick={handleClearButton}
           disabled={isContentEmpty()}
-          className="flex-1 h-full">
+          className="flex-1">
           Clear
         </Button>
         <Button
           variant="outline"
           onClick={handleFormatButton}
           disabled={!isContentValid}
-          className="flex-1 h-full">
+          className="flex-1">
           Format Content
         </Button>
       </div>
