@@ -13,6 +13,7 @@ const config: Config = {
   moduleNameMapper: {
     '^(.*)\\.(css|less|sass|scss)$': '<rootDir>/tests/styleMock.ts',
     '^(\\.{1,2}/.*)\\.js$': '$1',
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
   setupFilesAfterEnv: ['<rootDir>/tests/setupTests.ts'],
   transform: {
