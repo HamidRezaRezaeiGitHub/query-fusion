@@ -14,7 +14,7 @@ export class DefaultQueryResponse implements IQueryResponse {
     this.hasResultValue = builder.hasResultValue;
     this.stringResult = builder.stringResult;
     this.isArray = builder.isArray;
-    this.resultArray = builder.resultArray;
+    this.resultArray = [...builder.resultArray];
   }
 
   static builder(): DefaultQueryResponseBuilder {
