@@ -3,6 +3,7 @@ import { ContentType } from "../content/ContentType";
 import { EditorFocus } from "../layout/EditorFocus";
 import { IValidationResponse } from "./IValidationResponse";
 import { useTheme } from "../../contexts/useTheme";
+import { useContentType } from "../../contexts/useContentType";
 import AceEditor from "react-ace";
 import type ReactAce from "react-ace";
 import "ace-builds/src-noconflict/mode-json";
@@ -14,7 +15,6 @@ import "./QueryPanel.css";
 import "../../styles/debug.css";
 
 interface QueryPanelProps {
-  contentType: ContentType;
   getContent: (contentType: ContentType) => string;
   getQuery: (contentType: ContentType) => string;
   onQueryChange: (contentType: ContentType, newQuery: string) => void;
@@ -24,7 +24,6 @@ interface QueryPanelProps {
 }
 
 const QueryPanel = ({
-  contentType,
   getContent,
   getQuery,
   onQueryChange,
@@ -33,6 +32,7 @@ const QueryPanel = ({
   setFocusedEditor,
 }: QueryPanelProps) => {
   const { isDarkMode } = useTheme();
+  const { contentType } = useContentType();
   const editorMode = contentType.toLowerCase();
   const lightTheme = "chrome";
   const darkTheme = "monokai";

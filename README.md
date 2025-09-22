@@ -4,10 +4,11 @@ QueryFusion is a Vite-powered React + TypeScript single-page application for exp
 
 ## Key Features
 
-- **Dual content support** – Toggle between JSON and XML workflows through the navigation bar; each content type keeps its own content, query, and results using an internal `DefaultContentSpecificMap` store.
+- **Dual content support** – Toggle between JSON and XML workflows through the navigation bar; each content type keeps its own content, query, and results using an internal `DefaultContentSpecificMap` store. Content type state is managed through React Context to avoid prop drilling across components.
 - **Rich editing experience** – All three panels use Ace Editor with autocompletion, theming, and focus management so keyboard users can quickly switch between the content, query, and result panes.
 - **Content validation and formatting** – Validation is handled by the `ContentValidator`, delegating to JSON or XML validators to surface parsing issues in real time. When content is valid, the formatter service can pretty-print it for easier inspection.
 - **Query execution services** – Queries are processed client-side via `jsonpath` for JSON documents and `xpath` with `xmldom` for XML. Responses are normalized into `IQueryResponse` objects for consistent rendering.
+- **Context-driven state management** – Theme preferences and content type selection use React Context providers, eliminating prop drilling and providing clean separation of concerns.
 - **User experience helpers** – Includes dark/light theme switching, GitHub link, and responsive layout built with React Bootstrap and Font Awesome icons.
 
 ## Project Structure
@@ -21,6 +22,14 @@ QueryFusion is a Vite-powered React + TypeScript single-page application for exp
 │   │   ├── layout/          # Layout orchestration with editor focus management
 │   │   └── navbar/          # Navigation with branding, theme toggle, content type selector
 │   ├── contexts/            # React context providers and custom hooks
+│   │   ├── AppProvider.tsx         # Main provider wrapper that combines all contexts
+│   │   ├── ThemeContext.tsx        # Theme provider for dark/light mode switching
+│   │   ├── ContentTypeContext.tsx  # Content type provider for JSON/XML state management
+│   │   ├── themeContext.ts         # Theme context definition and types
+│   │   ├── contentTypeContext.ts   # Content type context definition and types
+│   │   ├── useTheme.ts            # Hook for consuming theme context
+│   │   ├── useContentType.ts      # Hook for consuming content type context
+│   │   └── index.ts               # Centralized exports for all contexts
 │   ├── services/            # Service classes for formatting, validation, and querying
 │   ├── styles/              # Shared styling helpers
 │   └── tests/               # Jest configuration and test setup files
