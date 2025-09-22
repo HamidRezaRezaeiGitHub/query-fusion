@@ -46,6 +46,7 @@ QueryFusion is a Vite-powered React + TypeScript single-page application for exp
    - **Expected time**: 2 seconds
    - **Current state**: No tests exist (exits with "No tests found"). Test infrastructure is configured but no test files are present.
    - **Test pattern**: Tests should be placed in `src/**/__tests__/**/*.(ts|tsx)` or `src/**/*.(spec|test).(ts|tsx)`
+   - **Test setup**: Configuration files are located in `tests/` directory
 
 ### Run the Application
 
@@ -118,15 +119,15 @@ QueryFusion is a Vite-powered React + TypeScript single-page application for exp
 ```
 ├── src/
 │   ├── components/
-│   │   ├── content/       # ContentPanel.tsx - file upload, format, clear
-│   │   ├── query/         # Query editor with validation
+│   │   ├── content/       # ContentPanel.tsx with content types and data models
+│   │   ├── query/         # Query editor with validation and query/validation models
 │   │   ├── result/        # Read-only result viewer  
-│   │   ├── layout/        # Main layout orchestration
+│   │   ├── layout/        # Main layout orchestration with editor focus management
 │   │   └── navbar/        # Navigation with theme toggle
-│   ├── model/             # TypeScript interfaces and types
+│   ├── contexts/          # React context providers and custom hooks
 │   ├── services/          # Business logic (validation, formatting, queries)
 │   └── styles/            # Shared CSS and styling helpers
-├── test/                  # Jest configuration and setup
+├── tests/                 # Jest configuration and setup
 ├── test-data/             # Sample JSON/XML files for testing
 └── public/                # Static assets
 ```
@@ -153,6 +154,15 @@ QueryFusion is a Vite-powered React + TypeScript single-page application for exp
 1. **Always run linting**: `npm run lint` 
 2. **Test build**: `npm run build`
 3. **Manual validation**: Run through at least one complete user scenario
+
+### After Making Changes
+1. **Update documentation**: Always update README.md and these copilot instructions if your changes affect:
+   - Project structure or folder organization
+   - Build processes or commands
+   - Development workflows
+   - Key features or functionality
+2. **Validate changes**: Re-run linting, building, and testing
+3. **Commit thoughtfully**: Include documentation updates in the same commit as the code changes
 
 ### Code Style
 - **ESLint**: Configure maximum 0 warnings (`--max-warnings 0`)
