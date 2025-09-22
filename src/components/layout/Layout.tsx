@@ -13,14 +13,12 @@ import "../../styles/debug.css";
 
 interface LayoutProps {
   contentType: ContentType;
-  isDarkMode: boolean;
   focusedEditor: EditorFocus;
   setFocusedEditor: (editor: EditorFocus) => void;
 }
 
 const Layout = ({
   contentType,
-  isDarkMode,
   focusedEditor,
   setFocusedEditor,
 }: LayoutProps) => {
@@ -38,7 +36,6 @@ const Layout = ({
           getContent={contentSpecificMap.getContent}
           onContentChange={contentSpecificMap.setContent}
           setValidationResponse={setValidationResponse}
-          isDarkMode={isDarkMode}
           focusedEditor={focusedEditor}
           setFocusedEditor={setFocusedEditor}
         />
@@ -51,7 +48,6 @@ const Layout = ({
             getQuery={contentSpecificMap.getQuery}
             onQueryChange={contentSpecificMap.setQuery}
             validationResponse={validationResponse}
-            isDarkMode={isDarkMode}
             focusedEditor={focusedEditor}
             setFocusedEditor={setFocusedEditor}
           />
@@ -61,7 +57,6 @@ const Layout = ({
             contentType={contentType}
             getResult={contentSpecificMap.getResult}
             onResultChange={contentSpecificMap.setResult}
-            isDarkMode={isDarkMode}
             focusedEditor={focusedEditor}
             setFocusedEditor={setFocusedEditor}
           />

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { ContentType } from "../../model/content/ContentType";
 import { EditorFocus } from "../../model/editor/EditorFocus";
+import { useTheme } from "../../contexts/useTheme";
 import AceEditor from "react-ace";
 import type ReactAce from "react-ace";
 import "ace-builds/src-noconflict/mode-json";
@@ -15,7 +16,6 @@ interface ResultPanelProps {
   contentType: ContentType;
   getResult: (contentType: ContentType) => string;
   onResultChange: (contentType: ContentType, newResult: string) => void;
-  isDarkMode: boolean;
   focusedEditor: EditorFocus;
   setFocusedEditor: (editor: EditorFocus) => void;
 }
@@ -24,10 +24,10 @@ const ResultPanel = ({
   contentType,
   getResult,
   onResultChange,
-  isDarkMode,
   focusedEditor,
   setFocusedEditor,
 }: ResultPanelProps) => {
+  const { isDarkMode } = useTheme();
   const editorMode = contentType.toLowerCase();
   const lightTheme = "chrome";
   const darkTheme = "monokai";

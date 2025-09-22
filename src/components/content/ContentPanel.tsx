@@ -4,6 +4,7 @@ import { EditorFocus } from "../../model/editor/EditorFocus";
 import { IValidationResponse } from "../../model/validation/IValidationResponse";
 import ContentValidator from "../../services/validation/ContentValidator";
 import ContentFormatter from "../../services/formatting/ContentFormatter";
+import { useTheme } from "../../contexts/useTheme";
 import AceEditor from "react-ace";
 import type ReactAce from "react-ace";
 import "ace-builds/src-noconflict/mode-json";
@@ -19,7 +20,6 @@ interface ContentPanelProps {
   getContent: (contentType: ContentType) => string;
   onContentChange: (contentType: ContentType, newContent: string) => void;
   setValidationResponse: (validationResponse: IValidationResponse) => void;
-  isDarkMode: boolean;
   focusedEditor: EditorFocus;
   setFocusedEditor: (editor: EditorFocus) => void;
 }
@@ -29,10 +29,10 @@ const ContentPanel = ({
   getContent,
   onContentChange,
   setValidationResponse,
-  isDarkMode,
   focusedEditor,
   setFocusedEditor,
 }: ContentPanelProps) => {
+  const { isDarkMode } = useTheme();
   const editorMode = contentType.toLowerCase();
   const lightTheme = "chrome";
   const darkTheme = "monokai";
