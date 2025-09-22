@@ -2,6 +2,8 @@
 
 QueryFusion is a Vite-powered React + TypeScript single-page application for exploring JSON and XML documents. It provides a three-panel layout where users can paste or upload content, compose queries, and review results with helpful tooling such as syntax highlighting, validation, and formatting utilities.
 
+The application uses modern web technologies including Tailwind CSS for styling and Shadcn/ui components for enhanced user interface elements.
+
 ## Key Features
 
 - **Dual content support** – Toggle between JSON and XML workflows through the navigation bar; each content type keeps its own content, query, and results using an internal `DefaultContentSpecificMap` store. Content type state is managed through React Context to avoid prop drilling across components.
@@ -9,7 +11,7 @@ QueryFusion is a Vite-powered React + TypeScript single-page application for exp
 - **Content validation and formatting** – Validation is handled by the `ContentValidator`, delegating to JSON or XML validators to surface parsing issues in real time. When content is valid, the formatter service can pretty-print it for easier inspection.
 - **Query execution services** – Queries are processed client-side via `jsonpath` for JSON documents and `xpath` with `xmldom` for XML. Responses are normalized into `IQueryResponse` objects for consistent rendering.
 - **Context-driven state management** – Theme preferences and content type selection use React Context providers, eliminating prop drilling and providing clean separation of concerns.
-- **User experience helpers** – Includes dark/light theme switching, GitHub link, and responsive layout built with React Bootstrap and Font Awesome icons.
+- **User experience helpers** – Includes dark/light theme switching, GitHub link, and responsive layout built with React Bootstrap, Tailwind CSS, and Shadcn/ui components with Font Awesome icons.
 
 ## Project Structure
 
@@ -20,7 +22,8 @@ QueryFusion is a Vite-powered React + TypeScript single-page application for exp
 │   │   ├── query/           # Query editor with validation and query response models  
 │   │   ├── result/          # Read-only result viewer
 │   │   ├── layout/          # Layout orchestration with editor focus management
-│   │   └── navbar/          # Navigation with branding, theme toggle, content type selector
+│   │   ├── navbar/          # Navigation with branding, theme toggle, content type selector
+│   │   └── ui/              # Shadcn/ui components (Button, Switch, Toggle, DropdownMenu)
 │   ├── contexts/            # React context providers and custom hooks
 │   │   ├── AppProvider.tsx         # Main provider wrapper that combines all contexts
 │   │   ├── ThemeContext.tsx        # Theme provider for dark/light mode switching
@@ -30,11 +33,15 @@ QueryFusion is a Vite-powered React + TypeScript single-page application for exp
 │   │   ├── useTheme.ts            # Hook for consuming theme context
 │   │   ├── useContentType.ts      # Hook for consuming content type context
 │   │   └── index.ts               # Centralized exports for all contexts
+│   ├── lib/                   # Utility functions (cn function for Tailwind class merging)
 │   ├── services/            # Service classes for formatting, validation, and querying
 │   ├── styles/              # Shared styling helpers
 │   └── tests/               # Jest configuration and test setup files
 ├── public                   # Static assets (e.g., favicon, logo)
 ├── index.html               # Vite entry point
+├── tailwind.config.js       # Tailwind CSS configuration
+├── postcss.config.js        # PostCSS configuration for Tailwind
+├── components.json          # Shadcn/ui configuration
 └── package.json             # Tooling configuration
 ```
 
@@ -56,6 +63,35 @@ QueryFusion is a Vite-powered React + TypeScript single-page application for exp
    ```bash
    npm run preview
    ```
+
+## Styling Architecture
+
+The application uses a hybrid approach combining multiple styling solutions:
+
+### Tailwind CSS
+- **Utility-first CSS framework** for rapid development and consistent design
+- **Configuration**: `tailwind.config.js` with custom color variables for theming
+- **PostCSS integration**: Processes Tailwind directives through `postcss.config.js`
+- **CSS variables**: Support for light/dark themes through HSL color variables
+
+### Shadcn/ui Components  
+- **Modern component library** built on Radix UI primitives with Tailwind styling
+- **Available components**: Button, Switch, Toggle, DropdownMenu (extensible)
+- **Configuration**: `components.json` defines paths and styling preferences
+- **Utilities**: Custom `cn()` function in `src/lib/utils.ts` for class merging
+
+### React Bootstrap (Legacy)
+- **Existing components** continue to work alongside Tailwind for gradual migration
+- **Three-panel layout** and responsive utilities maintained for stability
+- **FontAwesome icons** integrated for consistent iconography
+
+### Development Workflow
+```bash
+# The build process includes:
+npm run build        # TypeScript compilation + Vite build with Tailwind processing
+npm run lint         # ESLint with special rules for ui/ components
+npm run dev          # Development server with Tailwind JIT compilation
+```
 
 ## Testing
 
