@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import ThemeProvider from "./ThemeContext";
+import ContentTypeProvider from "./ContentTypeContext";
 
 interface AppProviderProps {
   children: ReactNode;
@@ -8,7 +9,9 @@ interface AppProviderProps {
 const AppProvider = ({ children }: AppProviderProps) => {
   return (
     <ThemeProvider>
-      {children}
+      <ContentTypeProvider>
+        {children}
+      </ContentTypeProvider>
     </ThemeProvider>
   );
 };

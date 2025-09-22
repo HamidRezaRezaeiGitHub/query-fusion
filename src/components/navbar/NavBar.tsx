@@ -4,19 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { useTheme } from "../../contexts/useTheme";
+import { useContentType } from "../../contexts/useContentType";
 import "./NavBar.css";
 import "../../styles/debug.css";
 
-interface NavBarProps {
-  contentType: ContentType;
-  setContentType: (value: ContentType) => void;
-}
-
-const NavBar = ({
-  contentType,
-  setContentType,
-}: NavBarProps) => {
+const NavBar = () => {
   const { isDarkMode, toggleTheme } = useTheme();
+  const { contentType, setContentType } = useContentType();
 
   return (
     <Navbar

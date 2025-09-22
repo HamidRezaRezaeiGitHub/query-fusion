@@ -3,13 +3,11 @@ import "./styles/debug.css";
 import NavBar from "./components/navbar/NavBar";
 import Layout from "./components/layout/Layout";
 import { useEffect, useState } from "react";
-import { ContentType } from "./components/content/ContentType";
 import { EditorFocus } from "./components/layout/EditorFocus";
 import { useTheme } from "./contexts/useTheme";
 
 function App() {
   const { isDarkMode } = useTheme();
-  const [contentType, setContentType] = useState<ContentType>(ContentType.XML);
   const [focusedEditor, setFocusedEditor] = useState(EditorFocus.Content);
   useEffect(() => {
     console.log(`Editor in focus: ${focusedEditor}`);
@@ -23,14 +21,10 @@ function App() {
           : "app app--full-screen app--light-mode"
       }>
       <div className="app__navbar">
-        <NavBar
-          contentType={contentType}
-          setContentType={setContentType}
-        />
+        <NavBar />
       </div>
       <div className="app__layout">
         <Layout
-          contentType={contentType}
           focusedEditor={focusedEditor}
           setFocusedEditor={setFocusedEditor}
         />
