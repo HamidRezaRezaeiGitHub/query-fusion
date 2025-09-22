@@ -1,4 +1,4 @@
-import { ContentType } from "../../model/content/ContentType";
+import { ContentType } from "../../components/content/ContentType";
 import { IContentFormatter } from "./IContentFormatter";
 import { JsonFormatter } from "./JsonFormatter";
 import { XmlFormatter } from "./XmlFormatter";

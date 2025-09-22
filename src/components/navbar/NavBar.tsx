@@ -1,5 +1,5 @@
 import { Nav, NavDropdown, Navbar } from "react-bootstrap";
-import { ContentType } from "../../model/content/ContentType";
+import { ContentType } from "../content/ContentType";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";

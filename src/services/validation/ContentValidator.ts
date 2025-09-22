@@ -1,6 +1,6 @@
-import { ContentType } from "../../model/content/ContentType";
-import { DefaultValidationResponse } from "../../model/validation/DefaultValidationResponse";
-import { IValidationResponse } from "../../model/validation/IValidationResponse";
+import { ContentType } from "../../components/content/ContentType";
+import { DefaultValidationResponse } from "../../components/query/DefaultValidationResponse";
+import { IValidationResponse } from "../../components/query/IValidationResponse";
 import { IContentValidator } from "./IContentValidator";
 import { JsonValidator } from "./JsonValidator";
 import { XmlValidator } from "./XmlValidator";

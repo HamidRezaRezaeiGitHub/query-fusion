@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { ContentType } from "../../model/content/ContentType";
-import { EditorFocus } from "../../model/editor/EditorFocus";
-import { IValidationResponse } from "../../model/validation/IValidationResponse";
+import { ContentType } from "./ContentType";
+import { EditorFocus } from "../layout/EditorFocus";
+import { IValidationResponse } from "../query/IValidationResponse";
 import ContentValidator from "../../services/validation/ContentValidator";
 import ContentFormatter from "../../services/formatting/ContentFormatter";
 import { useTheme } from "../../contexts/useTheme";

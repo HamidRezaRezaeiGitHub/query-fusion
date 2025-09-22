@@ -11,10 +11,10 @@ const config: Config = {
     '<rootDir>/src/**/*.(spec|test).(ts|tsx)',
   ],
   moduleNameMapper: {
-    '^(.*)\\.(css|less|sass|scss)$': '<rootDir>/test/styleMock.ts',
+    '^(.*)\\.(css|less|sass|scss)$': '<rootDir>/tests/styleMock.ts',
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },
-  setupFilesAfterEnv: ['<rootDir>/test/setupTests.ts'],
+  setupFilesAfterEnv: ['<rootDir>/tests/setupTests.ts'],
   transform: {
     '^.+\\.(ts|tsx)$': [
       'ts-jest',

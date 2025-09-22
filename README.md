@@ -15,17 +15,18 @@ QueryFusion is a Vite-powered React + TypeScript single-page application for exp
 ```
 ├── src
 │   ├── components
-│   │   ├── content/       # Content editor panel (upload, clear, format controls)
-│   │   ├── query/         # Query editor with validation-aware messaging
-│   │   ├── result/        # Read-only result viewer fed by query services
-│   │   ├── layout/        # Orchestrates panel composition and shared state
-│   │   └── navbar/        # Branding, theme toggle, and content type selector
-│   ├── model/             # TypeScript models for content, queries, and validation
-│   ├── services/          # Formatting, validation, and query service classes
-│   └── styles/            # Shared styling helpers
-├── public                 # Static assets (e.g., favicon, logo)
-├── index.html             # Vite entry point
-└── package.json           # Tooling configuration
+│   │   ├── content/         # Content editor panel with content types and data models
+│   │   ├── query/           # Query editor with validation and query response models  
+│   │   ├── result/          # Read-only result viewer
+│   │   ├── layout/          # Layout orchestration with editor focus management
+│   │   └── navbar/          # Navigation with branding, theme toggle, content type selector
+│   ├── contexts/            # React context providers and custom hooks
+│   ├── services/            # Service classes for formatting, validation, and querying
+│   ├── styles/              # Shared styling helpers
+│   └── tests/               # Jest configuration and test setup files
+├── public                   # Static assets (e.g., favicon, logo)
+├── index.html               # Vite entry point
+└── package.json             # Tooling configuration
 ```
 
 ## Getting Started
