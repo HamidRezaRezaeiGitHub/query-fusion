@@ -1,10 +1,10 @@
-import "./App.css";
 import "./styles/debug.css";
 import NavBar from "./components/navbar/NavBar";
 import Layout from "./components/layout/Layout";
 import { useEffect, useState } from "react";
 import { EditorFocus } from "./components/layout/EditorFocus";
 import { useTheme } from "./contexts/useTheme";
+import { cn } from "./lib/utils";
 
 function App() {
   const { isDarkMode } = useTheme();
@@ -15,15 +15,14 @@ function App() {
 
   return (
     <div
-      className={
-        isDarkMode
-          ? "app app--full-screen app--dark-mode"
-          : "app app--full-screen app--light-mode"
-      }>
-      <div className="app__navbar">
+      className={cn(
+        "flex flex-col h-screen w-full overflow-hidden",
+        isDarkMode ? "dark bg-gray-900" : "bg-blue-50"
+      )}>
+      <div className="flex-shrink-0 h-16">
         <NavBar />
       </div>
-      <div className="app__layout">
+      <div className="flex-1 flex">
         <Layout
           focusedEditor={focusedEditor}
           setFocusedEditor={setFocusedEditor}

@@ -6,6 +6,7 @@ import ContentValidator from "../../services/validation/ContentValidator";
 import ContentFormatter from "../../services/formatting/ContentFormatter";
 import { useTheme } from "../../contexts/useTheme";
 import { useContentType } from "../../contexts/useContentType";
+import { Button } from "../ui/button";
 import AceEditor from "react-ace";
 import type ReactAce from "react-ace";
 import "ace-builds/src-noconflict/mode-json";
@@ -13,7 +14,6 @@ import "ace-builds/src-noconflict/mode-xml";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/theme-chrome";
 import "ace-builds/src-noconflict/ext-language_tools";
-import "./ContentPanel.css";
 import "../../styles/debug.css";
 
 interface ContentPanelProps {
@@ -117,8 +117,9 @@ const ContentPanel = ({
   };
 
   return (
-    <>
-      <div className="content" onClick={onFocus}>
+    <div className="flex flex-col h-full gap-1">
+      {/* Editor */}
+      <div className="flex-1" onClick={onFocus}>
         <AceEditor
           placeholder={`Copy your ${editorMode.toUpperCase()} content here...`}
           mode={editorMode}
@@ -147,7 +148,9 @@ const ContentPanel = ({
           }}
         />
       </div>
-      <div className="buttons debug-border-black-gray">
+      
+      {/* Buttons */}
+      <div className="flex gap-1 h-10">
         <input
           type="file"
           ref={fileInputRef}
@@ -155,26 +158,28 @@ const ContentPanel = ({
           accept={`.txt, .${contentType.toLowerCase()}`}
           onChange={handleFileChange}
         />
-        <button
-          className="btn btn-primary buttons__upload"
+        <Button
           onClick={handleFileUploadButtonClick}
-          disabled={false}>
+          disabled={false}
+          className="flex-1 h-full">
           Upload File
-        </button>
-        <button
-          className="buttons__clear"
+        </Button>
+        <Button
+          variant="secondary"
           onClick={handleClearButton}
-          disabled={isContentEmpty()}>
+          disabled={isContentEmpty()}
+          className="flex-1 h-full">
           Clear
-        </button>
-        <button
-          className="buttons__format"
+        </Button>
+        <Button
+          variant="outline"
           onClick={handleFormatButton}
-          disabled={!isContentValid}>
+          disabled={!isContentValid}
+          className="flex-1 h-full">
           Format Content
-        </button>
+        </Button>
       </div>
-    </>
+    </div>
   );
 };
 
