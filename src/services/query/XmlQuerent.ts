@@ -2,7 +2,7 @@ import { DefaultQueryResponse } from "../../components/query/DefaultQueryRespons
 import { IQueryResponse } from "../../components/query/IQueryResponse";
 import { IContentQuerent } from "./IContentQuerent";
 import { DOMParser, XMLSerializer } from "xmldom";
-import xpath from "xpath";
+import * as xpath from "xpath";
 
 const isNode = (value: unknown): value is Node => {
   return (

@@ -74,7 +74,7 @@ describe('JsonFormatter', () => {
       formatter.formatContent(invalidJson);
       
       expect(consoleSpy).toHaveBeenCalledWith(
-        expect.stringContaining('Could not parse or beutify the JSON content!')
+        expect.stringContaining('Could not parse or beautify the JSON content!')
       );
       
       consoleSpy.mockRestore();

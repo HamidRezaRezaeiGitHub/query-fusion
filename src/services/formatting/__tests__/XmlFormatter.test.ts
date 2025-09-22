@@ -103,7 +103,7 @@ describe('XmlFormatter', () => {
       // xml-formatter is quite robust, but may fail on very malformed XML
       // Check if either it formats or logs an error
       const errorLogged = consoleSpy.mock.calls.some(call => 
-        call[0].includes('Could not parse or formt the XML content!')
+        call[0].includes('Could not parse or format the XML content!')
       );
       
       // Either the XML is formatted or an error is logged

@@ -30,7 +30,7 @@ export class DefaultQueryResponse implements IQueryResponse {
   hasResult = (): boolean => {
     return this.hasResultValue;
   };
-  getStringResultValu = (): string => {
+  getStringResultValue = (): string => {
     return this.stringResult;
   };
   isResultArray = (): boolean => {

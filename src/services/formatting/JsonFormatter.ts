@@ -8,10 +8,10 @@ export class JsonFormatter implements IContentFormatter {
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.log(
-          `Could not parse or beutify the JSON content! ${error.message}`
+          `Could not parse or beautify the JSON content! ${error.message}`
         );
       } else {
-        console.log("Could not parse or beutify the JSON content!");
+        console.log("Could not parse or beautify the JSON content!");
       }
       return content;
     }

@@ -11,10 +11,10 @@ export class XmlFormatter implements IContentFormatter {
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.log(
-          `Could not parse or formt the XML content! ${error.message}`
+          `Could not parse or format the XML content! ${error.message}`
         );
       } else {
-        console.log("Could not parse or formt the XML content!");
+        console.log("Could not parse or format the XML content!");
       }
       return content;
     }
