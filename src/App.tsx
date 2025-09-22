@@ -5,9 +5,10 @@ import Layout from "./components/layout/Layout";
 import { useEffect, useState } from "react";
 import { ContentType } from "./model/content/ContentType";
 import { EditorFocus } from "./model/editor/EditorFocus";
+import { useTheme } from "./contexts/useTheme";
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
+  const { isDarkMode } = useTheme();
   const [contentType, setContentType] = useState<ContentType>(ContentType.XML);
   const [focusedEditor, setFocusedEditor] = useState(EditorFocus.Content);
   useEffect(() => {
@@ -23,8 +24,6 @@ function App() {
       }>
       <div className="app__navbar">
         <NavBar
-          isDarkMode={isDarkMode}
-          setIsDarkMode={setIsDarkMode}
           contentType={contentType}
           setContentType={setContentType}
         />
@@ -32,7 +31,6 @@ function App() {
       <div className="app__layout">
         <Layout
           contentType={contentType}
-          isDarkMode={isDarkMode}
           focusedEditor={focusedEditor}
           setFocusedEditor={setFocusedEditor}
         />

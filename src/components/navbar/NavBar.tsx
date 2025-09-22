@@ -3,22 +3,21 @@ import { ContentType } from "../../model/content/ContentType";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { useTheme } from "../../contexts/useTheme";
 import "./NavBar.css";
 import "../../styles/debug.css";
 
 interface NavBarProps {
-  isDarkMode: boolean;
-  setIsDarkMode: (value: boolean | ((prevMode: boolean) => boolean)) => void;
   contentType: ContentType;
   setContentType: (value: ContentType) => void;
 }
 
 const NavBar = ({
-  isDarkMode,
-  setIsDarkMode,
   contentType,
   setContentType,
 }: NavBarProps) => {
+  const { isDarkMode, toggleTheme } = useTheme();
+
   return (
     <Navbar
       className="navbar align-items-center"
@@ -47,7 +46,7 @@ const NavBar = ({
         </NavDropdown>
       </Nav>
       <Nav className="navbar--push-right">
-        <Nav.Link onClick={() => setIsDarkMode((prevMode) => !prevMode)}>
+        <Nav.Link onClick={toggleTheme}>
           <FontAwesomeIcon
             className="navbar__switch"
             icon={isDarkMode ? faSun : faMoon}
