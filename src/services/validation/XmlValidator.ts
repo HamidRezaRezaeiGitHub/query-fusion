@@ -1,6 +1,6 @@
 import { IContentValidator } from "./IContentValidator";
-import { IValidationResponse } from "../../model/validation/IValidationResponse";
-import { DefaultValidationResponse } from "../../model/validation/DefaultValidationResponse";
+import { IValidationResponse } from "../../components/query/IValidationResponse";
+import { DefaultValidationResponse } from "../../components/query/DefaultValidationResponse";
 
 export class XmlValidator implements IContentValidator {
   isContentValid(content: string): IValidationResponse {

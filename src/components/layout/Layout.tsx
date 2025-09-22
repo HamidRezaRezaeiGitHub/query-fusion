@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { ContentType } from "../../model/content/ContentType";
-import { EditorFocus } from "../../model/editor/EditorFocus";
-import { IValidationResponse } from "../../model/validation/IValidationResponse";
-import { IContentSpecificMap } from "../../model/content/IContentSpecificMap";
-import { DefaultContentSpecificMap } from "../../model/content/DefaultContentSpecificMap";
-import { DefaultValidationResponse } from "../../model/validation/DefaultValidationResponse";
+import { ContentType } from "../content/ContentType";
+import { EditorFocus } from "./EditorFocus";
+import { IValidationResponse } from "../query/IValidationResponse";
+import { IContentSpecificMap } from "../content/IContentSpecificMap";
+import { DefaultContentSpecificMap } from "../content/DefaultContentSpecificMap";
+import { DefaultValidationResponse } from "../query/DefaultValidationResponse";
 import ContentPanel from "../content/ContentPanel";
 import QueryPanel from "../query/QueryPanel";
 import ResultPanel from "../result/ResultPanel";

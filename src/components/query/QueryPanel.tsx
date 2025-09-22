@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ContentType } from "../../model/content/ContentType";
-import { EditorFocus } from "../../model/editor/EditorFocus";
-import { IValidationResponse } from "../../model/validation/IValidationResponse";
+import { ContentType } from "../content/ContentType";
+import { EditorFocus } from "../layout/EditorFocus";
+import { IValidationResponse } from "./IValidationResponse";
 import { useTheme } from "../../contexts/useTheme";
 import AceEditor from "react-ace";
 import type ReactAce from "react-ace";

@@ -3,8 +3,8 @@ import "./styles/debug.css";
 import NavBar from "./components/navbar/NavBar";
 import Layout from "./components/layout/Layout";
 import { useEffect, useState } from "react";
-import { ContentType } from "./model/content/ContentType";
-import { EditorFocus } from "./model/editor/EditorFocus";
+import { ContentType } from "./components/content/ContentType";
+import { EditorFocus } from "./components/layout/EditorFocus";
 import { useTheme } from "./contexts/useTheme";
 
 function App() {

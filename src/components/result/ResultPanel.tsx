@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
-import { ContentType } from "../../model/content/ContentType";
-import { EditorFocus } from "../../model/editor/EditorFocus";
+import { ContentType } from "../content/ContentType";
+import { EditorFocus } from "../layout/EditorFocus";
 import { useTheme } from "../../contexts/useTheme";
 import AceEditor from "react-ace";
 import type ReactAce from "react-ace";

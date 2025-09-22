@@ -1,5 +1,5 @@
-import { ContentType } from "../../model/content/ContentType";
-import { IQueryResponse } from "../../model/query/IQueryResponse";
+import { ContentType } from "../../components/content/ContentType";
+import { IQueryResponse } from "../../components/query/IQueryResponse";
 import { IContentQuerent } from "./IContentQuerent";
 import { JsonQuerent } from "./JsonQuerent";
 import { XmlQuerent } from "./XmlQuerent";

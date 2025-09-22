@@ -1,5 +1,5 @@
-import { DefaultQueryResponse } from "../../model/query/DefaultQueryResponse";
-import { IQueryResponse } from "../../model/query/IQueryResponse";
+import { DefaultQueryResponse } from "../../components/query/DefaultQueryResponse";
+import { IQueryResponse } from "../../components/query/IQueryResponse";
 import { IContentQuerent } from "./IContentQuerent";
 import { DOMParser, XMLSerializer } from "xmldom";
 import xpath from "xpath";
