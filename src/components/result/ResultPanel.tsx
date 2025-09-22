@@ -10,7 +10,6 @@ import "ace-builds/src-noconflict/mode-xml";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/theme-chrome";
 import "ace-builds/src-noconflict/ext-language_tools";
-import "./ResultPanel.css";
 import "../../styles/debug.css";
 
 interface ResultPanelProps {
@@ -51,7 +50,7 @@ const ResultPanel = ({
   };
 
   return (
-    <div className="result" onClick={onFocus}>
+    <div className="h-full w-full" onClick={onFocus}>
       <AceEditor
         placeholder={`Query result will be here...`}
         mode={editorMode}

@@ -11,7 +11,7 @@ The application uses modern web technologies including Tailwind CSS for styling 
 - **Content validation and formatting** – Validation is handled by the `ContentValidator`, delegating to JSON or XML validators to surface parsing issues in real time. When content is valid, the formatter service can pretty-print it for easier inspection.
 - **Query execution services** – Queries are processed client-side via `jsonpath` for JSON documents and `xpath` with `xmldom` for XML. Responses are normalized into `IQueryResponse` objects for consistent rendering.
 - **Context-driven state management** – Theme preferences and content type selection use React Context providers, eliminating prop drilling and providing clean separation of concerns.
-- **User experience helpers** – Includes dark/light theme switching, GitHub link, and responsive layout built with React Bootstrap, Tailwind CSS, and Shadcn/ui components with Font Awesome icons.
+- **User experience helpers** – Includes dark/light theme switching, GitHub link, and responsive layout built with Tailwind CSS and Shadcn/ui components with Font Awesome icons for a modern, accessible interface.
 
 ## Project Structure
 
@@ -66,13 +66,14 @@ The application uses modern web technologies including Tailwind CSS for styling 
 
 ## Styling Architecture
 
-The application uses a hybrid approach combining multiple styling solutions:
+The application uses modern CSS technologies for styling and components:
 
 ### Tailwind CSS
 - **Utility-first CSS framework** for rapid development and consistent design
 - **Configuration**: `tailwind.config.js` with custom color variables for theming
 - **PostCSS integration**: Processes Tailwind directives through `postcss.config.js`
 - **CSS variables**: Support for light/dark themes through HSL color variables
+- **Responsive design**: Mobile-first approach with 2-column layout on wide screens, 1-column on narrow screens
 
 ### Shadcn/ui Components  
 - **Modern component library** built on Radix UI primitives with Tailwind styling
@@ -80,9 +81,10 @@ The application uses a hybrid approach combining multiple styling solutions:
 - **Configuration**: `components.json` defines paths and styling preferences
 - **Utilities**: Custom `cn()` function in `src/lib/utils.ts` for class merging
 
-### React Bootstrap (Legacy)
-- **Existing components** continue to work alongside Tailwind for gradual migration
-- **Three-panel layout** and responsive utilities maintained for stability
+### Layout Design
+- **Navbar**: Fixed at top with logo, content type selector, theme toggle, and GitHub link
+- **Wide screens (md+)**: 2-column layout with content panel on left, query/result panels stacked on right
+- **Narrow screens**: 1-column layout with all panels stacked vertically
 - **FontAwesome icons** integrated for consistent iconography
 
 ### Development Workflow
@@ -101,14 +103,16 @@ No automated test suite is currently defined; feature behavior can be validated 
 
 To finish the UI-only QueryFusion experience (no accounts, no persistence, and no data collection), work through the following tasks:
 
-1. **Design polish and responsiveness** – Audit the three-panel layout on common breakpoints, tightening spacing, typography, and iconography so the interface feels cohesive on both desktop and tablet widths.
+1. ~~**Modern styling migration**~~ ✅ **COMPLETED** – Migrated from React Bootstrap to Tailwind CSS and Shadcn/ui components with responsive 2-column/1-column layout.
 2. **Editor affordances** – Add inline guidance in each editor panel (placeholder text, tooltips, empty-state messaging) to clarify how users can paste/upload content, craft queries, and interpret results without requiring documentation.
 3. **Validation feedback** – Enhance the validation messaging area with color, icons, and succinct copy that make JSON/XML issues immediately clear while remaining entirely client-side.
 4. **Result visualization** – Provide alternative renderers (tree view for JSON, formatted markup for XML) that help users inspect complex responses without leaving the browser.
-5. **Theme refinements** – Revisit the light/dark theme palette to ensure accessible contrast ratios and consistent styling across all components.
-6. **Keyboard and screen reader support** – Confirm that focus order, ARIA labels, and skip links enable complete navigation and usage without a mouse.
-7. **Sample content shortcuts** – Offer quick actions that populate the editors with demo JSON/XML snippets so users can try the tool instantly while keeping everything local to the session.
-8. **In-browser help modal** – Create a lightweight help/about modal summarizing capabilities, privacy assurances (client-only processing, no data storage), and external resources.
-9. **Performance review** – Profile the client bundle, eliminating unnecessary dependencies and enabling lazy loading where possible to keep the UI fast.
-10. **Manual QA checklist** – Document a manual test pass covering the JSON and XML workflows, theme toggling, formatting, and validation—all within the browser.
+5. **Keyboard and screen reader support** – Confirm that focus order, ARIA labels, and skip links enable complete navigation and usage without a mouse.
+6. **Sample content shortcuts** – Offer quick actions that populate the editors with demo JSON/XML snippets so users can try the tool instantly while keeping everything local to the session.
+7. **In-browser help modal** – Create a lightweight help/about modal summarizing capabilities, privacy assurances (client-only processing, no data storage), and external resources.
+8. **Performance review** – Profile the client bundle, eliminating unnecessary dependencies and enabling lazy loading where possible to keep the UI fast.
+9. **Manual QA checklist** – Document a manual test pass covering the JSON and XML workflows, theme toggling, formatting, and validation—all within the browser.
+10. **Mobile experience enhancement** – Optimize the 1-column layout for mobile devices with improved touch targets and swipe gestures for panel navigation.
+11. **Button interaction polish** – Add hover states, loading states, and better disabled state styling for all Shadcn buttons.
+12. **Theme consistency** – Ensure all Ace Editor themes properly align with light/dark mode across all panels.
 

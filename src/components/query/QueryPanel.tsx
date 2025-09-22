@@ -11,7 +11,6 @@ import "ace-builds/src-noconflict/mode-xml";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/theme-chrome";
 import "ace-builds/src-noconflict/ext-language_tools";
-import "./QueryPanel.css";
 import "../../styles/debug.css";
 
 interface QueryPanelProps {
@@ -125,7 +124,7 @@ const QueryPanel = ({
   };
 
   return (
-    <div className="query" onClick={onFocus}>
+    <div className="h-full w-full" onClick={onFocus}>
       <AceEditor
         placeholder={placeholderValue}
         mode={editorMode}
