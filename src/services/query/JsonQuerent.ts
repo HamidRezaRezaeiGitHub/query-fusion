@@ -1,7 +1,7 @@
 import { DefaultQueryResponse } from "../../components/query/DefaultQueryResponse";
 import { IQueryResponse } from "../../components/query/IQueryResponse";
 import { IContentQuerent } from "./IContentQuerent";
-import jsonpath from "jsonpath";
+import * as jsonpath from "jsonpath";
 
 export class JsonQuerent implements IContentQuerent {
   queryContent(content: string, queries: string[]): IQueryResponse[] {

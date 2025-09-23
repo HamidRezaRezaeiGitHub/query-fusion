@@ -2,7 +2,7 @@ export interface IQueryResponse {
   isValid(): boolean;
   getValidationError(): string;
   hasResult(): boolean;
-  getStringResultValu(): string;
+  getStringResultValue(): string;
   isResultArray(): boolean;
   getArrayResult(): Array<unknown>;
 }

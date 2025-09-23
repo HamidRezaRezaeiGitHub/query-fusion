@@ -1,9 +1,10 @@
 import { IContentFormatter } from "./IContentFormatter";
-import xmlFormatter from "xml-formatter";
 
 export class XmlFormatter implements IContentFormatter {
   formatContent(content: string): string {
     try {
+      // Use require for better Jest compatibility
+      const xmlFormatter = require("xml-formatter");
       return xmlFormatter(content, {
         indentation: "    ",
         collapseContent: true,
@@ -11,10 +12,10 @@ export class XmlFormatter implements IContentFormatter {
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.log(
-          `Could not parse or formt the XML content! ${error.message}`
+          `Could not parse or format the XML content! ${error.message}`
         );
       } else {
-        console.log("Could not parse or formt the XML content!");
+        console.log("Could not parse or format the XML content!");
       }
       return content;
     }
