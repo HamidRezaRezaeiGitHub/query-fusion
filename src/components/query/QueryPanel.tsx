@@ -30,12 +30,12 @@ const QueryPanel = ({
   focusedEditor,
   setFocusedEditor,
 }: QueryPanelProps) => {
-  const { isDarkMode } = useTheme();
+  const { actualTheme } = useTheme();
   const { contentType } = useContentType();
   const editorMode = contentType.toLowerCase();
   const lightTheme = "chrome";
   const darkTheme = "monokai";
-  const editorTheme = isDarkMode ? darkTheme : lightTheme;
+  const editorTheme = actualTheme === 'dark' ? darkTheme : lightTheme;
   const editorRef = useRef<ReactAce | null>(null);
   const [placeholderValue, setPlaceHolderValue] = useState("");
   const [editorValue, setEditorValue] = useState("");

@@ -1,9 +1,2 @@
-import { createContext } from "react";
-
-export interface ThemeContextType {
-  isDarkMode: boolean;
-  toggleTheme: () => void;
-  setIsDarkMode: (isDarkMode: boolean) => void;
-}
-
-export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+// Re-export types and context from ThemeContext for backward compatibility
+export type { Theme, ThemeContextType } from './ThemeContext';
