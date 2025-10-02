@@ -4,7 +4,7 @@ import { SingleChangingIconThemeToggle } from "./components/theme";
 import Layout from "./components/layout/Layout";
 import { useEffect, useState } from "react";
 import { EditorFocus } from "./components/layout/EditorFocus";
-import { useContentType } from "./contexts/useContentType";
+import { useContentType } from "./contexts/ContentTypeContext";
 import { ContentType } from "./components/content/ContentType";
 
 function App() {
