@@ -10,11 +10,12 @@ QueryFusion is a Vite-powered React + TypeScript single-page application for exp
 
 **CRITICAL: NEVER CANCEL any builds or commands. All operations complete quickly in this project.**
 
-1. **Install dependencies** (first time setup requires dependency fixes):
+1. **Install dependencies**:
    ```bash
    npm install
    ```
-   - **Expected time**: 20-30 seconds
+   - **Expected time**: 20-30 seconds (first install), faster on subsequent installs with lock file
+   - **Lock file**: Project includes `package-lock.json` for consistent dependency versions
    - **Common issue**: If installation fails with version not found errors, the following packages need version fixes:
      - `@types/xmldom`: Use `^0.1.34` (not `^0.1.35`)
      - `react-ace`: Use `^11.0.1` (not `^11.5.0`) 
@@ -213,9 +214,10 @@ The application is automatically deployed to GitHub Pages when changes are pushe
 
 ### How It Works
 1. Push to `main` branch triggers the workflow
-2. Workflow installs dependencies and builds the app
-3. Creates `404.html` (copy of `index.html`) for SPA routing
-4. Deploys `dist` folder to GitHub Pages using `actions/deploy-pages@v4`
+2. Workflow uses npm cache (via `package-lock.json`) to speed up dependency installation
+3. Installs dependencies and builds the app
+4. Creates `404.html` (copy of `index.html`) for SPA routing
+5. Deploys `dist` folder to GitHub Pages using `actions/deploy-pages@v4`
 
 ### Manual Setup Required (One-time)
 Repository owner must configure GitHub Pages settings:

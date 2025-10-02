@@ -10,17 +10,23 @@ The following configuration has been added to your repository:
    - Automatically builds and deploys the application when you push to `main` branch
    - Can also be triggered manually via workflow dispatch
    - Uses Node.js 18 for consistency
+   - Includes npm caching for faster builds
    - Creates a 404.html file for SPA routing support
 
-2. **Vite Configuration** (`vite.config.ts`)
+2. **Dependency Lock File** (`package-lock.json`)
+   - Added to ensure consistent dependency versions across all environments
+   - Required for npm caching in GitHub Actions to work properly
+   - Speeds up deployment by caching node_modules between runs
+
+3. **Vite Configuration** (`vite.config.ts`)
    - Added `base: '/query-fusion/'` to configure the correct base path for GitHub Pages
    - This ensures all assets are loaded from the correct subdirectory
 
-3. **Jekyll Prevention** (`public/.nojekyll`)
+4. **Jekyll Prevention** (`public/.nojekyll`)
    - Added empty `.nojekyll` file to prevent GitHub from processing the site with Jekyll
    - This is important for Vite-built applications
 
-4. **Documentation Updates**
+5. **Documentation Updates**
    - Updated README.md with live demo link and deployment instructions
    - Updated copilot-instructions.md with deployment information
 
@@ -102,6 +108,7 @@ After completing these steps:
 ### Build Fails
 - **Check**: Review the Actions tab for error messages
 - **Common Issue**: npm install failures - usually resolve on retry
+- **Lock file missing**: Ensure `package-lock.json` exists in the repository root (required for npm caching)
 
 ### Site Not Loading / 404 Error
 - **Check**: Wait 1-2 minutes after workflow completes
