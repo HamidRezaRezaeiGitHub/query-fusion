@@ -1,5 +1,7 @@
 # QueryFusion
 
+**🚀 [Live Demo](https://hamidrezarezaeigithub.github.io/query-fusion/)**
+
 QueryFusion is a Vite-powered React + TypeScript single-page application for exploring JSON and XML documents. It provides a three-panel layout where users can paste or upload content, compose queries, and review results with helpful tooling such as syntax highlighting, validation, and formatting utilities.
 
 The application uses modern web technologies including Tailwind CSS for styling and Shadcn/ui components for enhanced user interface elements.
@@ -63,6 +65,39 @@ The application uses modern web technologies including Tailwind CSS for styling 
    ```bash
    npm run preview
    ```
+
+## Deployment
+
+This application is automatically deployed to GitHub Pages when changes are pushed to the `main` branch. The deployment is handled by a GitHub Actions workflow (`.github/workflows/deploy.yml`).
+
+### Live Application
+
+The application is available at: **[https://hamidrezarezaeigithub.github.io/query-fusion/](https://hamidrezarezaeigithub.github.io/query-fusion/)**
+
+### Manual Setup Required
+
+To enable GitHub Pages deployment for this repository, you need to configure the following settings in your GitHub repository:
+
+1. **Go to Repository Settings** → Navigate to your repository on GitHub and click on **Settings**
+2. **Pages Configuration** → In the left sidebar, click on **Pages**
+3. **Source Configuration** → Under "Build and deployment":
+   - **Source**: Select "GitHub Actions" (not "Deploy from a branch")
+4. **Wait for Deployment** → After pushing to main, the workflow will run automatically. The first deployment may take a few minutes.
+
+### Workflow Details
+
+The deployment workflow:
+- Triggers on pushes to `main` branch or manually via workflow dispatch
+- Installs dependencies and builds the application
+- Creates a `404.html` file (copy of `index.html`) for SPA routing support
+- Deploys the `dist` folder to GitHub Pages
+- Uses Node.js 18 for consistency
+
+### Local Development vs Production
+
+- **Development**: Run `npm run dev` - application runs at `http://localhost:5173/`
+- **Production**: The app is configured with base path `/query-fusion/` in `vite.config.ts` for GitHub Pages
+- **Preview Production Build**: Run `npm run preview` to test the production build locally
 
 ## Styling Architecture
 

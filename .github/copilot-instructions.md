@@ -197,5 +197,36 @@ npm run test -- --watch       # Watch mode for test development
 - **Runtime**: ✅ Fully functional application
 - **Test coverage**: ❌ No tests currently exist
 - **Documentation**: ✅ Comprehensive README and this guide
+- **Deployment**: ✅ Automated GitHub Pages deployment configured
+
+## GitHub Pages Deployment
+
+The application is automatically deployed to GitHub Pages when changes are pushed to the `main` branch.
+
+### Live Application
+- **URL**: https://hamidrezarezaeigithub.github.io/query-fusion/
+
+### Configuration Files
+- **Workflow**: `.github/workflows/deploy.yml` - GitHub Actions workflow for automated deployment
+- **Vite Config**: `vite.config.ts` - Contains `base: '/query-fusion/'` for proper routing on GitHub Pages
+- **Jekyll Prevention**: `public/.nojekyll` - Prevents GitHub from processing the site with Jekyll
+
+### How It Works
+1. Push to `main` branch triggers the workflow
+2. Workflow installs dependencies and builds the app
+3. Creates `404.html` (copy of `index.html`) for SPA routing
+4. Deploys `dist` folder to GitHub Pages using `actions/deploy-pages@v4`
+
+### Manual Setup Required (One-time)
+Repository owner must configure GitHub Pages settings:
+1. Go to repository **Settings** → **Pages**
+2. Under "Build and deployment", set **Source** to "GitHub Actions"
+3. Save and wait for first deployment
+
+### Testing Deployment Locally
+```bash
+npm run build          # Build with base path '/query-fusion/'
+npm run preview        # Preview at http://localhost:4173/query-fusion/
+```
 
 **Always validate your changes by building (`npm run build`) and manually testing the application (`npm run dev`) before committing.**
