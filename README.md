@@ -53,6 +53,8 @@ The application uses modern web technologies including Tailwind CSS for styling 
    ```bash
    npm install
    ```
+   The project includes a `package-lock.json` file to ensure consistent dependency versions across all environments.
+
 2. **Run the development server**
    ```bash
    npm run dev
@@ -88,6 +90,7 @@ To enable GitHub Pages deployment for this repository, you need to configure the
 
 The deployment workflow:
 - Triggers on pushes to `main` branch or manually via workflow dispatch
+- Uses npm cache (via `package-lock.json`) for faster dependency installation
 - Installs dependencies and builds the application
 - Creates a `404.html` file (copy of `index.html`) for SPA routing support
 - Deploys the `dist` folder to GitHub Pages
